@@ -1,5 +1,8 @@
 package model;
 
+/*
+ * A set of classified documents
+ */
 public interface ProcessedDocumentSet {
 	
 	public ProcessedDocument getDocument(int index);

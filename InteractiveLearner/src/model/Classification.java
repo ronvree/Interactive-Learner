@@ -1,6 +1,6 @@
 package model;
 
-public enum Class {
+public enum Classification {
 	
 	SPAM, HAM;
 	

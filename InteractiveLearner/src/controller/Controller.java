@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.Classification;
 import model.Document;
-import model.ProcessedDocument;
 import model.classifiers.Classifier;
 import model.classifiers.NaiveBayes;
 import model.comparator.Comparator;
@@ -19,7 +18,6 @@ import view.View;
 public class Controller {
 	
 	public static void main(String[] args) {
-		
 		List<Document> toProcess = new ArrayList<Document>();
 		
 		Classifier classifier = new NaiveBayes();

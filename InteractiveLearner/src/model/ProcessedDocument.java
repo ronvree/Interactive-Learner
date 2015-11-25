@@ -1,12 +1,21 @@
 package model;
 
-/*
- * A document and its classification
- */
-public interface ProcessedDocument {
+public class ProcessedDocument {
 	
-	public Document getDocument();
+	private Document document;
+	private Classification classification;
 	
-	public Classification getClassification();
+	public ProcessedDocument(Document document, Classification classification)	{
+		this.document = document;
+		this.classification = classification;
+	}
 	
+	public Document getDocument()	{
+		return this.document;
+	}
+		
+	public Classification getClassification()	{
+		return this.classification;
+	}
+
 }

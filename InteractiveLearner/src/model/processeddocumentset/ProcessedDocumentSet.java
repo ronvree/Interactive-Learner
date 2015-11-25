@@ -1,4 +1,8 @@
-package model;
+package model.processeddocumentset;
+
+import model.Classification;
+import model.Document;
+import model.ProcessedDocument;
 
 /*
  * A set of classified documents

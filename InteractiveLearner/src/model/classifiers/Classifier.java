@@ -1,4 +1,8 @@
-package model;
+package model.classifiers;
+
+import model.Classification;
+import model.Document;
+import model.processeddocumentset.ProcessedDocumentSet;
 
 /*
  * Classifies documents based on training on a set of pre-classified set of documents.

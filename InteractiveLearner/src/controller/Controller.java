@@ -13,6 +13,7 @@ import model.processeddocumentset.ProcessedDocumentSet;
 import model.processeddocumentset.StandardProcessedDocumentSet;
 import model.user.StandardUser;
 import model.user.User;
+import view.TestUI;
 import view.View;
 
 public class Controller {
@@ -24,7 +25,7 @@ public class Controller {
 		User user = new StandardUser();
 		Comparator comparator = new HumanComparator(user);
 		ProcessedDocumentSet documentSet = new StandardProcessedDocumentSet();
-		View view;
+		View view = new TestUI();
 		
 		documentSet.reset();
 		for (Document document : toProcess)	{

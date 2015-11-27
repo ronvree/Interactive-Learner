@@ -4,11 +4,11 @@ import model.Classification;
 import model.Document;
 import model.user.User;
 
-public class HumanComparator implements Comparator {
+public class StandardComparator implements Comparator {
 	
 	private User user;
 	
-	public HumanComparator(User user)	{
+	public StandardComparator(User user)	{
 		this.user = user;
 	}
 	

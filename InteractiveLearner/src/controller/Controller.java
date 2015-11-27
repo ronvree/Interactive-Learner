@@ -8,10 +8,10 @@ import model.Document;
 import model.classifiers.Classifier;
 import model.classifiers.NaiveBayes;
 import model.comparator.Comparator;
-import model.comparator.HumanComparator;
+import model.comparator.StandardComparator;
 import model.processeddocumentset.ProcessedDocumentSet;
 import model.processeddocumentset.StandardProcessedDocumentSet;
-import model.user.StandardUser;
+import model.user.HumanUser;
 import model.user.User;
 import view.TestUI;
 import view.View;
@@ -22,8 +22,8 @@ public class Controller {
 		List<Document> toProcess = new ArrayList<Document>();
 		
 		Classifier classifier = new NaiveBayes();
-		User user = new StandardUser();
-		Comparator comparator = new HumanComparator(user);
+		User user = new HumanUser();
+		Comparator comparator = new StandardComparator(user);
 		ProcessedDocumentSet documentSet = new StandardProcessedDocumentSet();
 		View view = new TestUI();
 		

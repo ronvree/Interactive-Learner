@@ -1,7 +1,9 @@
 package model;
 
+import java.io.IOException;
+
 public interface Document {
 	
-	public String getDocument();
+	public String getDocument() throws IOException;
 	
 }

@@ -1,12 +1,12 @@
 package testing;
 
-import model.processeddocumentset.StandardProcessedDocumentSet;
+import model.processeddocumentset.CorpusMail;
 
 public class TestDocumentSet {
 
 	public static void main(String[] args) {
 		
-		StandardProcessedDocumentSet docset = new StandardProcessedDocumentSet();
+		CorpusMail docset = new CorpusMail();
 		
 		
 		

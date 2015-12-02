@@ -12,14 +12,14 @@ import model.ProcessedDocument;
 import model.StandardDocument;
 import model.documentprocessor.DocumentProcessor;
 
-public class StandardProcessedDocumentSet implements ProcessedDocumentSet {
+public class CorpusMail implements ProcessedDocumentSet {
 	
 	private static final String PATH = "src/corpus-mails";
 	
 	private List<ProcessedDocument> documents;
 	private Map<String, Integer> frequencies;
 	
-	public StandardProcessedDocumentSet()	{
+	public CorpusMail()	{
 		this.documents = new ArrayList<ProcessedDocument>();
 		this.frequencies = new HashMap<String, Integer>();
 		this.reset();

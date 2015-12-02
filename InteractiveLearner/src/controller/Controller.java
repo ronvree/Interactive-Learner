@@ -7,7 +7,7 @@ import model.classifiers.NaiveBayes;
 import model.comparator.Comparator;
 import model.comparator.StandardComparator;
 import model.processeddocumentset.ProcessedDocumentSet;
-import model.processeddocumentset.StandardProcessedDocumentSet;
+import model.processeddocumentset.CorpusMail;
 import model.user.HumanUser;
 import model.user.User;
 import view.TestUI;
@@ -19,7 +19,7 @@ public class Controller {
 		Classifier classifier = new NaiveBayes();
 		User user = new HumanUser();
 		Comparator comparator = new StandardComparator(user);
-		ProcessedDocumentSet documentSet = new StandardProcessedDocumentSet();
+		ProcessedDocumentSet documentSet = new CorpusMail();
 		View view = new TestUI();
 		
 		documentSet.reset();

@@ -1,5 +1,6 @@
 package model.processeddocumentset;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,8 @@ import model.ProcessedDocument;
 import model.documentprocessor.DocumentProcessor;
 
 public class StandardProcessedDocumentSet implements ProcessedDocumentSet {
+	
+	private static final String PATH = "src/corpus-mails";
 	
 	private List<ProcessedDocument> documents;
 	private Map<String, Integer> frequencies;
@@ -51,9 +54,15 @@ public class StandardProcessedDocumentSet implements ProcessedDocumentSet {
 	@Override
 	public void reset() {
 		this.clear();
-		
-		// TODO Auto-generated method stub
-		
+		File data = new File(PATH);
+		for (File corpus : data.listFiles())	{
+			for (File part : corpus.listFiles())	{
+				for (File message : part.listFiles())	{
+					Classification classification = (message.getName().startsWith("sp"))? Classification.SPAM:Classification.HAM;
+					this.put(new StandardDocument(message), classification);
+				}
+			}
+		}
 	}
 
 	@Override

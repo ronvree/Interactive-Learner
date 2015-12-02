@@ -1,6 +1,7 @@
 package testing;
 
 import model.Document;
+import model.documentprocessor.DocumentProcessor;
 import model.user.HumanUser;
 import model.user.User;
 
@@ -11,7 +12,7 @@ public class PickDocumentTest {
 		User user = new HumanUser();
 		
 		Document doc = user.pickDocument();
-		
+		DocumentProcessor.tokenize(doc);
 		
 		
 	}

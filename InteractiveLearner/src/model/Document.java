@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface Document {
 	
-	public String getDocument() throws IOException;
+	public String getDocument();
 	
 }

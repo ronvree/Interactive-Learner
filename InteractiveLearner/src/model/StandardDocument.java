@@ -10,7 +10,7 @@ public class StandardDocument implements Document {
         try {
             FileReader reader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(reader);
-            bufferedReader.read(buffer, 0, 15);
+            bufferedReader.read(buffer, 0, (int) file.length());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

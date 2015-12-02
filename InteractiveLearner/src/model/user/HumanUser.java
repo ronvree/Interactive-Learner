@@ -1,8 +1,11 @@
 package model.user;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import javax.swing.JFileChooser;
 
 import model.Classification;
 import model.Document;
@@ -11,6 +14,8 @@ public class HumanUser implements User {
 	
 	private static final String CONFIRMATION = "yes";
 	private static final String DISAGREE = "no";
+	
+	private static final JFileChooser fc = new JFileChooser();
 	
 	@Override
 	public String getInput() {
@@ -26,8 +31,13 @@ public class HumanUser implements User {
 
 	@Override
 	public Document pickDocument() {
-		// TODO Auto-generated method stub
-		return null;
+		StandardDocument doc = null;
+		int returnVal = fc.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            doc = new StandardDocument(file);
+        }
+		return doc;
 	}
 
 	@Override

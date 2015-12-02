@@ -12,7 +12,7 @@ public class PickDocumentTest {
 		User user = new HumanUser();
 		
 		Document doc = user.pickDocument();
-		DocumentProcessor.tokenize(doc);
+		DocumentProcessor.normalize(DocumentProcessor.tokenize(doc));
 		
 		
 	}

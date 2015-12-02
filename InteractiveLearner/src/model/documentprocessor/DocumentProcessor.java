@@ -4,8 +4,16 @@ import model.Document;
 
 public interface DocumentProcessor {
 	
-	public String[] tokenize(Document document);
+	public static String[] tokenize(Document document)	{
+		// TODO
+		
+		return null;
+	}
 	
-	public String[] normalize(String[] words);
+	public static String[] normalize(String[] words)	{
+		// TODO
+		
+		return null;
+	}
 	
 }

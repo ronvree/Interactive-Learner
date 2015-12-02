@@ -9,6 +9,6 @@ public interface User {
 	
 	public Document pickDocument();
 	
-	public Classification classify(Document document);
+	public boolean classify(Document document, Classification classification);
 	
 }

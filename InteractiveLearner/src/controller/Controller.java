@@ -34,7 +34,6 @@ public class Controller {
 			view.update();																			/* Show progress 					*/
 		}
 		
-		
 	}
 	
 }

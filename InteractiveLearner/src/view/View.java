@@ -7,7 +7,7 @@ public interface View {
 	
 	public Document pickDocument();
 	
-	public Classification classify(Document document);
+	public boolean classify(Document document, Classification classification);
 	
 	public void update();
 	

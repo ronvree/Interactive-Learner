@@ -18,9 +18,9 @@ public class ComputerUser implements User {
 	}
 
 	@Override
-	public Classification classify(Document document) {
+	public boolean classify(Document document, Classification classification) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 }

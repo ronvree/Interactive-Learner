@@ -9,6 +9,7 @@ import java.util.Map;
 import model.Classification;
 import model.Document;
 import model.ProcessedDocument;
+import model.StandardDocument;
 import model.documentprocessor.DocumentProcessor;
 
 public class StandardProcessedDocumentSet implements ProcessedDocumentSet {

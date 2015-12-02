@@ -9,6 +9,7 @@ import javax.swing.JFileChooser;
 
 import model.Classification;
 import model.Document;
+import model.StandardDocument;
 
 public class HumanUser implements User {
 	

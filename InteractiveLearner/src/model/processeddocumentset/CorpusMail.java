@@ -15,6 +15,7 @@ import model.documentprocessor.DocumentProcessor;
 public class CorpusMail implements ProcessedDocumentSet {
 	
 	private static final String PATH = "src/corpus-mails";
+	private static final String SPAMINDICATION = "sp";
 	
 	private List<ProcessedDocument> documents;
 	private Map<String, Integer> frequencies;
@@ -29,7 +30,12 @@ public class CorpusMail implements ProcessedDocumentSet {
 	public ProcessedDocument getDocument(int index) {
 		return this.documents.get(index);
 	}
-
+	
+	@Override
+	public int getFrequency(String word)	{
+		return this.frequencies.get(word);
+	}
+	
 	@Override
 	public int size() {
 		return this.documents.size();
@@ -43,11 +49,11 @@ public class CorpusMail implements ProcessedDocumentSet {
 		words = DocumentProcessor.normalize(words);
 		
 		for (String word : words)	{
-			Integer count = this.frequencies.get(word);
-			if (count == null)	{
-				this.frequencies.put(word, new Integer(0));
+			if (!this.frequencies.containsKey(word))	{
+				this.frequencies.put(word, new Integer(1));
 			} else {
-				frequencies.put(word, count++);
+				Integer count = this.frequencies.get(word);
+				frequencies.put(word, count + 1);
 			}
 		}
 	}
@@ -59,7 +65,7 @@ public class CorpusMail implements ProcessedDocumentSet {
 		for (File corpus : data.listFiles())	{
 			for (File part : corpus.listFiles())	{
 				for (File message : part.listFiles())	{
-					Classification classification = (message.getName().startsWith("sp"))? Classification.SPAM:Classification.HAM;
+					Classification classification = (message.getName().startsWith(SPAMINDICATION))? Classification.SPAM:Classification.HAM;
 					this.put(new StandardDocument(message), classification);
 				}
 			}

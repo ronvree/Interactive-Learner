@@ -15,10 +15,13 @@ public class StandardComparator implements Comparator {
 	@Override
 	public Classification compare(Document document, Classification classification) {
 		boolean correct = this.user.classify(document, classification);
-		
-		
-		// TODO Auto-generated method stub
-		return null;
+		Classification correctClassification;
+		if (correct) {
+			correctClassification = classification;
+		} else {
+            correctClassification = classification.other(classification);
+        }
+		return correctClassification;
 	}
 
 }

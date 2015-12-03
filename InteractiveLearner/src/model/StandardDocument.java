@@ -5,6 +5,8 @@ import java.io.*;
 public class StandardDocument implements Document {
 
     private String text;
+    private Classification classification = null;
+
     public StandardDocument(File file) {
         char[] buffer = new char[(int) file.length()];
         try {
@@ -22,5 +24,11 @@ public class StandardDocument implements Document {
     @Override
     public String getDocument() {
         return text;
+    }
+    public void setClassification(Classification classification) {
+        this.classification = classification;
+    }
+    public Classification getClassification() {
+        return this.classification;
     }
 }

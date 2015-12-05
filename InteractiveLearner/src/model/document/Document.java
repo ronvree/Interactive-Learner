@@ -1,6 +1,4 @@
-package model;
-
-import java.io.IOException;
+package model.document;
 
 public interface Document {
 	

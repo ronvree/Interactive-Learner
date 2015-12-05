@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 
 import javax.swing.JFileChooser;
 
-import model.Document;
-import model.StandardDocument;
+import model.document.Document;
+import model.document.StandardDocument;
 
 public class HumanUser implements User {
 	

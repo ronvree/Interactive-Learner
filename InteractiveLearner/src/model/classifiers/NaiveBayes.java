@@ -1,6 +1,6 @@
 package model.classifiers;
 
-import model.Document;
+import model.document.Document;
 import model.processeddocumentset.ProcessedDocumentSet;
 
 public class NaiveBayes implements Classifier {

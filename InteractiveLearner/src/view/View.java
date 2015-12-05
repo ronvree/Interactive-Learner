@@ -1,6 +1,6 @@
 package view;
 
-import model.Document;
+import model.document.Document;
 
 public interface View {
 	

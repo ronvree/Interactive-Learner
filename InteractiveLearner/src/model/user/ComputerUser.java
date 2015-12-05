@@ -1,6 +1,6 @@
 package model.user;
 
-import model.Document;
+import model.document.Document;
 
 public class ComputerUser implements User {
 

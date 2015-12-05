@@ -1,6 +1,6 @@
 package model.documentprocessor;
 
-import model.Document;
+import model.document.Document;
 
 public interface DocumentProcessor {
 

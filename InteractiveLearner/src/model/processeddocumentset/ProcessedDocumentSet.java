@@ -1,7 +1,7 @@
 package model.processeddocumentset;
 
-import model.Document;
-import model.ProcessedDocument;
+import model.document.Document;
+import model.document.processed.ProcessedDocument;
 
 /*
  * A set of classified documents

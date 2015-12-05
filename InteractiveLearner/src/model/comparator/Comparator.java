@@ -1,6 +1,6 @@
 package model.comparator;
 
-import model.Document;
+import model.document.Document;
 
 /*
  * Uses user input to compare the document's classification to the expected classification.

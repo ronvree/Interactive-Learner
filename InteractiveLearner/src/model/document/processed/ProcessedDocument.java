@@ -1,4 +1,6 @@
-package model;
+package model.document.processed;
+
+import model.document.Document;
 
 public class ProcessedDocument {
 	

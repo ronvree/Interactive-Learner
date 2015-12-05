@@ -1,4 +1,4 @@
-package model;
+package model.document;
 
 import java.io.*;
 

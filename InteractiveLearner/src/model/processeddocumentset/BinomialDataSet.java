@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.Document;
-import model.ProcessedDocument;
-import model.StandardDocument;
+import model.document.Document;
+import model.document.StandardDocument;
+import model.document.processed.ProcessedDocument;
 import model.documentprocessor.DocumentProcessor;
 
 public class BinomialDataSet implements ProcessedDocumentSet {

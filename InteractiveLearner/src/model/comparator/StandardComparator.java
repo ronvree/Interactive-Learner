@@ -1,6 +1,6 @@
 package model.comparator;
 
-import model.Document;
+import model.document.Document;
 import model.user.User;
 
 public class StandardComparator implements Comparator {

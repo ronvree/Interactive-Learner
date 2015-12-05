@@ -1,7 +1,7 @@
 package testing;
 
-import model.Document;
-import model.StandardDocument;
+import model.document.Document;
+import model.document.StandardDocument;
 import model.documentprocessor.DocumentProcessor;
 import model.user.HumanUser;
 import model.user.User;

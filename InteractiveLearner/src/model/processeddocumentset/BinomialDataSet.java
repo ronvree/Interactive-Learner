@@ -11,15 +11,33 @@ import model.document.StandardDocument;
 import model.document.processed.ProcessedDocument;
 import model.documentprocessor.DocumentProcessor;
 
+/**
+ * Capable of storing Documents with two different classifications. Data about frequency can be queried easily.
+ * @author Ron
+ *
+ */
 public class BinomialDataSet implements ProcessedDocumentSet {
 	
+	/**
+	 * Source files of the documents, sorted by classification. The names of these files name the classification.
+	 */
 	private File srcFile1;
 	private File srcFile2;
 	
+	/**
+	 * Classifications (Names of the source files)
+	 */
 	private String class1;
 	private String class2;
 	
+	/**
+	 * List of all documents
+	 */
 	private List<ProcessedDocument> documents;
+	
+	/**
+	 * Map containing the frequency of each word, for both classifications.
+	 */
 	private Map<String, Map<String, Integer>> frequencies;
 	
 	public BinomialDataSet(File src1, File src2)	{

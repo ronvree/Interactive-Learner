@@ -3,9 +3,9 @@ package model;
 public class ProcessedDocument {
 	
 	private Document document;
-	private Classification classification;
+	private String classification;
 	
-	public ProcessedDocument(Document document, Classification classification)	{
+	public ProcessedDocument(Document document, String classification)	{
 		this.document = document;
 		this.classification = classification;
 	}
@@ -14,7 +14,7 @@ public class ProcessedDocument {
 		return this.document;
 	}
 		
-	public Classification getClassification()	{
+	public String getClassification()	{
 		return this.classification;
 	}
 

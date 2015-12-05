@@ -1,6 +1,5 @@
 package model.classifiers;
 
-import model.Classification;
 import model.Document;
 import model.processeddocumentset.ProcessedDocumentSet;
 
@@ -10,7 +9,7 @@ import model.processeddocumentset.ProcessedDocumentSet;
 
 public interface Classifier {
 	
-	public Classification classify(Document document);
+	public String classify(Document document);
 	
 	public void train(ProcessedDocumentSet documents);
 	

@@ -1,6 +1,5 @@
 package view;
 
-import model.Classification;
 import model.Document;
 
 public class TestUI implements View {
@@ -18,7 +17,7 @@ public class TestUI implements View {
 	}
 
 	@Override
-	public boolean classify(Document document, Classification classification) {
+	public boolean classify(Document document, String classification) {
 		// TODO Auto-generated method stub
 		return false;
 	}

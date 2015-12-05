@@ -1,6 +1,5 @@
 package model.user;
 
-import model.Classification;
 import model.Document;
 
 public class ComputerUser implements User {
@@ -18,7 +17,7 @@ public class ComputerUser implements User {
 	}
 
 	@Override
-	public boolean classify(Document document, Classification classification) {
+	public boolean classify(Document document, String classification) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -5,13 +5,13 @@ import java.io.*;
 public class StandardDocument implements Document {
 
     private String text;
-    private Classification classification = null;
 
     public StandardDocument(File file) {
         char[] buffer = new char[(int) file.length()];
+        BufferedReader bufferedReader;
         try {
             FileReader reader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            bufferedReader = new BufferedReader(reader);
             bufferedReader.read(buffer, 0, (int) file.length());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -25,10 +25,5 @@ public class StandardDocument implements Document {
     public String getDocument() {
         return text;
     }
-    public void setClassification(Classification classification) {
-        this.classification = classification;
-    }
-    public Classification getClassification() {
-        return this.classification;
-    }
+    
 }

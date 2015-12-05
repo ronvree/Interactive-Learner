@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 
 import javax.swing.JFileChooser;
 
-import model.Classification;
 import model.Document;
 import model.StandardDocument;
 
@@ -42,7 +41,7 @@ public class HumanUser implements User {
 	}
 
 	@Override
-	public boolean classify(Document document, Classification classification) {
+	public boolean classify(Document document, String classification) {
 		boolean valid = false;
 		String input = "";
 		do {

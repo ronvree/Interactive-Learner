@@ -1,6 +1,5 @@
 package model.comparator;
 
-import model.Classification;
 import model.Document;
 
 /*
@@ -8,6 +7,6 @@ import model.Document;
  */
 public interface Comparator {
 	
-	public Classification compare(Document document, Classification classification);
+	public String compare(Document document, String classification);
 	
 }

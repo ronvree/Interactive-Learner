@@ -1,6 +1,5 @@
 package model.processeddocumentset;
 
-import model.Classification;
 import model.Document;
 import model.ProcessedDocument;
 
@@ -13,9 +12,11 @@ public interface ProcessedDocumentSet {
 	
 	public int getFrequency(String word);
 	
+	public int getFrequency(String word, String classification);
+	
 	public int size();
 	
-	public void put(Document document, Classification classification);
+	public void put(Document document, String classification);
 	
 	public void reset();
 	

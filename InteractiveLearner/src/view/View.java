@@ -1,13 +1,12 @@
 package view;
 
-import model.Classification;
 import model.Document;
 
 public interface View {
 	
 	public Document pickDocument();
 	
-	public boolean classify(Document document, Classification classification);
+	public boolean classify(Document document, String classification);
 	
 	public void update();
 	

@@ -24,7 +24,7 @@ public interface DocumentProcessor {
 
 
 	public static String[] tokenize(Document document)	{
-		String text = document.getDocument();
+		String text = document.getText();
 //		System.out.println("Text: " + text);
 		String[] split = text.split("\\s+");
 //		for(int i = 0; i < split.length; i++) {

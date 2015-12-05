@@ -22,7 +22,7 @@ public class StandardDocument implements Document {
     }
 
     @Override
-    public String getDocument() {
+    public String getText() {
         return text;
     }
     

@@ -71,8 +71,7 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	public void put(Document document, String classification) {
 		this.documents.add(new ProcessedDocument(document, classification));
 		
-		String[] words = DocumentProcessor.tokenize(document);
-		words = DocumentProcessor.normalize(words);
+		String[] words = DocumentProcessor.normalize(document);
 		
 		for (String c : this.frequencies.keySet())	{
 			Map<String, Integer> frequency = this.frequencies.get(c);

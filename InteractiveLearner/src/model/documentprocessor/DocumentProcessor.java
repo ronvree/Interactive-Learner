@@ -2,8 +2,6 @@ package model.documentprocessor;
 
 import model.document.Document;
 
-import java.util.ArrayList;
-
 public interface DocumentProcessor {
 
 	// Elegant code!

@@ -59,7 +59,9 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 
 	@Override
 	public int getFrequency(String word) {
-		return this.frequencies.get(class1).get(word) + this.frequencies.get(class2).get(word);
+		Integer count1 = this.frequencies.get(class1).get(word);
+		Integer count2 = this.frequencies.get(class2).get(word);
+		return  ((count1 != null)? count1:0) + ((count2 != null)? count2:0);
 	}
 
 	@Override
@@ -104,15 +106,13 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 		
 		String[] words = DocumentProcessor.normalize(document);
 		
-		for (String c : this.frequencies.keySet())	{
-			Map<String, Integer> frequency = this.frequencies.get(c);
-			for (String word : words)	{
-				if (!frequency.containsKey(word))	{
-					frequency.put(word, new Integer(1));
-				} else {
-					Integer count = frequency.get(word);
-					frequency.put(word, count + 1);
-				}
+		Map<String, Integer> frequency = this.frequencies.get(classification);
+		for (String word : words)	{
+			if (!frequency.containsKey(word))	{
+				frequency.put(word, new Integer(1));
+			} else {
+				Integer count = frequency.get(word);
+				frequency.put(word, count + 1);
 			}
 		}
 	}
@@ -137,7 +137,8 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 
 	@Override
 	public int getFrequency(String word, String classification) {
-		return this.frequencies.get(classification).get(word);
+		Integer count = this.frequencies.get(classification).get(word);
+		return count != null? count:0;
 	}
 
 }

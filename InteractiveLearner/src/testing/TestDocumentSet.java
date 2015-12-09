@@ -20,10 +20,13 @@ public class TestDocumentSet {
 		System.out.println("Nr of " + c1 + ": " + docset.countDocuments(c1));
 		System.out.println("Nr of " + c2 + ": " + docset.countDocuments(c2));
 		System.out.println();
+		
+		String s = "free";
+		
 		System.out.println("Nr of words: " + docset.wordCount());
-		System.out.println("Freq of \"salary\": " + docset.getFrequency("salary"));
-		System.out.println("Freq of \"salary\" in " + c2 + ": " + docset.getFrequency("salary", c2));
-		System.out.println("Freq of \"salary\" in " + c1 + ": " + docset.getFrequency("salary", c1));
+		System.out.println("Freq of " + s + ": " + docset.getFrequency(s));
+		System.out.println("Freq of " + s + " in " + c2 + ": " + docset.getFrequency(s, c2));
+		System.out.println("Freq of " + s + " in " + c1 + ": " + docset.getFrequency(s, c1));
 		
 	}
 

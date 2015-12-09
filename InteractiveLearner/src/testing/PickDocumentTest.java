@@ -18,7 +18,7 @@ public class PickDocumentTest {
 		BinomialDataSet docset = new BinomialDataSet(f1,f2);
 		Classifier NB = new NaiveBayes("spam", "ham");
 		NB.train(docset);
-		NB.classify(new StandardDocument(new File("InteractiveLearner"+File.separator+"data"+File.separator+"spam"+File.separator+"spmsga1.txt")));
+		NB.classify(new StandardDocument(new File("InteractiveLearner"+File.separator+"data"+File.separator+"ham"+File.separator+"3-1msg3.txt")));
 	}
 	
 }

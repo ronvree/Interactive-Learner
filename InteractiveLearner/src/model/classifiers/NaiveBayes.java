@@ -1,7 +1,6 @@
 package model.classifiers;
 
 import model.document.Document;
-import model.document.processed.ProcessedDocument;
 import model.documentprocessor.DocumentProcessor;
 import model.processeddocumentset.ProcessedDocumentSet;
 

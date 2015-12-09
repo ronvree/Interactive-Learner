@@ -1,17 +1,11 @@
 package testing;
 
+import java.io.File;
+
 import model.classifiers.Classifier;
 import model.classifiers.NaiveBayes;
-import model.document.Document;
 import model.document.StandardDocument;
-import model.document.processed.ProcessedDocument;
-import model.documentprocessor.DocumentProcessor;
 import model.processeddocumentset.BinomialDataSet;
-import model.processeddocumentset.ProcessedDocumentSet;
-import model.user.HumanUser;
-import model.user.User;
-
-import java.io.File;
 
 public class PickDocumentTest {
 	

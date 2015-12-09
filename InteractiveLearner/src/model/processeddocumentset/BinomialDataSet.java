@@ -79,6 +79,15 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	}
 	
 	@Override
+	public int wordCount(String classification)	{
+		int count = 0;
+		for (String word : this.frequencies.get(classification).keySet())	{
+			count += this.frequencies.get(classification).get(word);
+		}
+		return count;
+	}
+	
+	@Override
 	public int countDocuments(String classification)	{
 		int count = 0;
 		for (ProcessedDocument doc : this.documents)	{

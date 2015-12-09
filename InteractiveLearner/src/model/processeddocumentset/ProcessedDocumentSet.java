@@ -40,6 +40,12 @@ public interface ProcessedDocumentSet {
 	public int countDocuments(String classification);
 	
 	/**
+	 * Returns the total amount of words in documents with this classification
+	 * @param classification
+	 */
+	public int wordCount(String classification);
+	
+	/**
 	 * Put a new document in the set
 	 * @param document -- document
 	 * @param classification -- its classification

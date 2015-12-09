@@ -66,6 +66,28 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	public int size() {
 		return this.documents.size();
 	}
+	
+	@Override
+	public int wordCount()	{
+		int count = 0;
+		for (String c : this.frequencies.keySet())	{
+			for (String w : this.frequencies.get(c).keySet())	{
+				count += this.frequencies.get(c).get(w);
+			}
+		}
+		return count;
+	}
+	
+	@Override
+	public int countDocuments(String classification)	{
+		int count = 0;
+		for (ProcessedDocument doc : this.documents)	{
+			if (doc.getClassification().equals(classification))	{
+				count++;
+			}
+		}
+		return count;
+	}
 
 	@Override
 	public void put(Document document, String classification) {

@@ -120,11 +120,15 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	@Override
 	public void reset() {
 		this.clear();
-		for (File file : srcFile1.listFiles())	{
-			this.put(new StandardDocument(file), class1);
-		}
-		for (File file : srcFile2.listFiles())	{
-			this.put(new StandardDocument(file), class2);
+		File[] list1 = srcFile1.listFiles();
+		File[] list2 = srcFile2.listFiles();
+		if (list1 != null && list2 != null) 	{
+			for (File file : list1)	{
+				this.put(new StandardDocument(file), class1);
+			}
+			for (File file : list2)	{
+				this.put(new StandardDocument(file), class2);
+			}
 		}
 	}
 

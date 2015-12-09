@@ -51,7 +51,7 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 		this.frequencies = new HashMap<String, Map<String, Integer>>();
 		this.frequencies.put(class1, new HashMap<String, Integer>());
 		this.frequencies.put(class2, new HashMap<String, Integer>());
-//		this.reset();
+		this.reset();
 	}
 	
 	@Override

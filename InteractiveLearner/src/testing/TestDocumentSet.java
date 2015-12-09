@@ -8,7 +8,7 @@ public class TestDocumentSet {
 
 	public static void main(String[] args) {
 		
-		String location = "src/dataset/";
+		String location = "InteractiveLearner/src/dataset/";
 		String c1 = "ham";
 		String c2 = "spam";
 		

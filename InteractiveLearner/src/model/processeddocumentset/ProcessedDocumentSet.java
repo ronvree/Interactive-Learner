@@ -61,5 +61,10 @@ public interface ProcessedDocumentSet {
 	 * Clear the learned data
 	 */
 	public void clear();
+
+	/**
+	 * Counts documents of classification containing word
+	 */
+	public int countDocsWithWordInClass(String word, String classification);
 	
 }

@@ -145,4 +145,15 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 		return count != null? count:0;
 	}
 
+	@Override
+	public int countDocsWithWordInClass(String word, String classification) {
+		int result = 0;
+		for (ProcessedDocument doc : this.documents) {
+			if (doc.getDocument().getText().contains(word)) {
+				result++;
+			}
+		}
+		return result;
+	}
+
 }

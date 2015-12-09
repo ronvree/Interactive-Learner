@@ -20,7 +20,8 @@ public class NaiveBayes implements Classifier {
 	public String classify(Document document) {
 		String[] normalized = DocumentProcessor.normalize(document);
 
-		int change = calculate(normalized);
+		double change = calculate(normalized);
+		System.out.println("Dus het is: " + change);
 		return null;
 	}
 
@@ -29,40 +30,35 @@ public class NaiveBayes implements Classifier {
 		kb = documents;
 	}
 
-	public int calculate(String[] normalized) {
-		int wordInClass1 = 0;
-		int wordInClass2 = 0;
-		int totalFreqWord = 0;
-
-		int changeWordGivenClassification;
-		int changeWord;
-		int changeClassification;
-		int changeClassificationGivenWord;
-		int freqInKB = 0;
-
-		int totalChangeClassificationGivenWord = 0;
-
+	public double calculate(String[] normalized) {
+		double changeWordsGivenClassification = 0;
 		for (String word : normalized) {
-			totalFreqWord += kb.getFrequency(word);
-			wordInClass1 += kb.getFrequency(word, classification1);
-			wordInClass2 += kb.getFrequency(word, classification2);
-
-			freqInKB  = kb.getFrequency(word);
-			changeWordGivenClassification = kb.getFrequency(word, classification1) / kb.wordCount(classification1);
-			changeWord = wordInClass1 / freqInKB;
-			changeClassification = kb.wordCount(classification1) / kb.wordCount();
-
-			changeClassificationGivenWord = changeWordGivenClassification / changeWord * changeClassification;
-
-			totalChangeClassificationGivenWord += changeClassificationGivenWord;
-
+			changeWordsGivenClassification = changeWordsGivenClassification + (Math.log(((double) kb.getFrequency(word, classification1) + 1) / ((double) kb.wordCount(classification1) + 1)));
 		}
+		double changeClassification = (double) kb.wordCount(classification1) / (double) kb.wordCount();
+		double changeClassificationGivenWords = Math.log(changeClassification) + changeWordsGivenClassification;
 
-		int change = totalChangeClassificationGivenWord / normalized.length;
+		System.out.println("changeWordsGivenClassification: " + changeWordsGivenClassification);
+		System.out.println("changeClassification: " + changeClassification);
+		System.out.println("changeClassificationGivenWords: " + changeClassificationGivenWords);
 
-		System.out.println("Change: " + change);
+		double TOTAL1 = changeClassificationGivenWords;
 
-		return change;
+		double changeWordsGivenClassification2 = 0;
+		for (String word : normalized) {
+			changeWordsGivenClassification2 = changeWordsGivenClassification2 + (Math.log(((double) kb.getFrequency(word, classification2) + 1) / ((double) kb.wordCount(classification2) + 1)));
+		}
+		double changeClassification2 = (double) kb.wordCount(classification2) / (double) kb.wordCount();
+		double changeClassificationGivenWords2 = Math.log(changeClassification2) + changeWordsGivenClassification2;
+
+		System.out.println("changeWordsGivenClassification: " + changeWordsGivenClassification2);
+		System.out.println("changeClassification: " + changeClassification2);
+		System.out.println("changeClassificationGivenWords: " + changeClassificationGivenWords2);
+
+		double TOTAL2 = changeWordsGivenClassification2;
+		System.out.println("Class 1: " + TOTAL1);
+		System.out.println("Class 2: " + TOTAL2);
+
+		return Math.max(TOTAL1, TOTAL2);
 	}
-
 }

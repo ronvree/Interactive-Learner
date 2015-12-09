@@ -41,7 +41,7 @@ public class NaiveBayes implements Classifier {
 		double changeClassification2 = (double) kb.wordCount(classification2) / wordCount;
 		double changeClassificationGivenWords2 = Math.log(changeClassification2) + changeWordsGivenClassification2;
 
-		double TOTAL2 = changeWordsGivenClassification2;
+		double TOTAL2 = changeClassificationGivenWords2;
 
 		String result;
 		if(TOTAL1 > TOTAL2) {

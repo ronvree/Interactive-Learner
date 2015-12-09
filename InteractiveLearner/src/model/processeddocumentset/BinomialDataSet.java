@@ -1,6 +1,8 @@
 package model.processeddocumentset;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +51,7 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 		this.frequencies = new HashMap<String, Map<String, Integer>>();
 		this.frequencies.put(class1, new HashMap<String, Integer>());
 		this.frequencies.put(class2, new HashMap<String, Integer>());
-		this.reset();
+//		this.reset();
 	}
 	
 	@Override

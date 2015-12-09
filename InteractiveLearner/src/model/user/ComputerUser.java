@@ -1,5 +1,7 @@
 package model.user;
 
+import java.io.File;
+
 import model.document.Document;
 
 public class ComputerUser implements User {
@@ -20,6 +22,12 @@ public class ComputerUser implements User {
 	public boolean classify(Document document, String classification) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public File pickFile() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

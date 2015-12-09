@@ -1,8 +1,7 @@
-/controller/
-/model/
-/view/
-/testing/
 /corpus-mails/
-/test.txt
-/DataSet/
+/controller/
 /dataset/
+/model/
+/test.txt
+/testing/
+/view/

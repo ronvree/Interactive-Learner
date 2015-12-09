@@ -51,4 +51,10 @@ public class HumanUser implements User {
 		return input.equals(CONFIRMATION);
 	}
 
+	@Override
+	public File pickFile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

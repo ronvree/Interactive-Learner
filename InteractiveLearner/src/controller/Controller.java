@@ -1,12 +1,17 @@
 package controller;
 
+import model.classifiers.Classifier;
+import model.classifiers.NaiveBayes;
+import model.user.HumanUser;
+import model.user.User;
+
 public class Controller {
 	
-//	public static void main(String[] args) {
-//		Classifier classifier = new NaiveBayes();
-//		User user = new HumanUser();
+	public static void main(String[] args) {
+		Classifier classifier = new NaiveBayes();
+		User user = new HumanUser();
 //		Comparator comparator = new StandardComparator(user);
-//		ProcessedDocumentSet documentSet = new CorpusMail();
+//		ProcessedDocumentSet documentSet = new BinomialDataSet();
 //		View view = new TestUI();
 //		
 //		documentSet.reset();
@@ -21,6 +26,6 @@ public class Controller {
 //			view.update();																			/* Show progress 					*/
 //		}
 //		
-//	}
+	}
 	
 }

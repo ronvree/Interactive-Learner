@@ -21,7 +21,7 @@ public class TestDocumentSet {
 		System.out.println("Nr of " + c2 + ": " + docset.countDocuments(c2));
 		System.out.println();
 		
-		String s = "free";
+		String s = "viagra";
 		
 		System.out.println("Nr of words: " + docset.wordCount());
 		System.out.println("Freq of " + s + ": " + docset.getFrequency(s));

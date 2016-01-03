@@ -45,7 +45,7 @@ public class testClassifier {
 			Classifier NB = new NaiveBayes("spam", "ham");
 			NB.train(docset);
 
-			File testSet = new File("InteractiveLearner" + File.separator + "data" + File.separator + "testSet");
+			File testSet = new File("src" + File.separator + "data" + File.separator + "testSet");
 			int counter = 1;
 			for (File file : testSet.listFiles()) {
 				System.out.println("File " + counter + " of " + testSet.listFiles().length);

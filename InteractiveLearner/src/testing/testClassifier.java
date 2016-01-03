@@ -39,13 +39,14 @@ public class testClassifier {
 			//TODO delete when having GUI.
 			System.out.println("START");
 			long time = System.currentTimeMillis();
-			File f1 = new File("InteractiveLearner" + File.separator + "data" + File.separator + "spam");
-			File f2 = new File("InteractiveLearner" + File.separator + "data" + File.separator + "ham");
+			File f1 = new File("data" + File.separator + "spam");
+			File f2 = new File("data" + File.separator + "ham");
 			BinomialDataSet docset = new BinomialDataSet(f1, f2);
 			Classifier NB = new NaiveBayes("spam", "ham");
 			NB.train(docset);
 
-			File testSet = new File("src" + File.separator + "data" + File.separator + "testSet");
+//			File testSet = new File("src" + File.separator + "data" + File.separator + "testSet");
+			File testSet = new File("data" + File.separator + "testSet");
 			int counter = 1;
 			for (File file : testSet.listFiles()) {
 				System.out.println("File " + counter + " of " + testSet.listFiles().length);

@@ -1,19 +1,24 @@
 package testing;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import model.featureselection.ChiSquared;
+import model.featureselection.FeatureSelection;
+import model.processeddocumentset.BinomialDataSet;
 import model.processeddocumentset.ProcessedDocumentSet;
 
 public class WritingChiSquared extends ChiSquared {
 	
 	private static final String STANDARD = "UTF-8";
-	private static final String FILENAME = "src/ChiSquaredValues.txt";
+	private static final String FILENAME = "src/chi-words.txt";
 	private static final String LINE = "--------------------------------------------------------------------";
 	
-	PrintWriter writer;
+	private static final int THRESHOLD = 0;
+	
+	private PrintWriter writer;
 	
 	public WritingChiSquared(ProcessedDocumentSet dataSet) {
 		super(dataSet);
@@ -41,9 +46,20 @@ public class WritingChiSquared extends ChiSquared {
 		double B = this.dataSet.getFrequency(word) - A;					// the number of the documents that contain the word but do not belong to category
 		double score = (2*N*(A-B)*(A-B))/((A + B)*((2*N)-(A+B)));
 //		System.out.println(N + "\t" + A + "\t" + B + "\t" + score + "\t" + word);
-		writer.printf("%-10s %-10s %-10s %-10.3f %-10s\n", N, A, B, score, word);
-		writer.flush();
+		if (score >= THRESHOLD)	{
+			writer.printf("%-10s %-10s %-10s %-10.3f %-10s\n", N, A, B, score, word);
+			writer.flush();
+		}
 		return (int) score ;
+	}
+	
+	public static void main(String[] args) {
+		String location = "src/dataset/";
+		String c1 = "ham";
+		String c2 = "spam";
+		ProcessedDocumentSet dataset = new BinomialDataSet(new File(location + c1), new File(location + c2));
+		FeatureSelection fs = new WritingChiSquared(dataset);
+		fs.update();
 	}
 
 }

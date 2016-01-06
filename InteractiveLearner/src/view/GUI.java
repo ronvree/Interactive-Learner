@@ -1,10 +1,12 @@
 package view;
 
+import controller.Controller;
+import testing.testClassifierV2;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.*;
-import java.util.*;
 
 
 public class GUI extends JPanel implements ActionListener {
@@ -20,7 +22,7 @@ public class GUI extends JPanel implements ActionListener {
     String firstClassNameValue;
     String secondClassNameValue;
 
-    String choosertitle;
+    String chooserTitle;
 
     public GUI() {
         firstClass = new JButton("Choose first train folder");
@@ -77,21 +79,31 @@ public class GUI extends JPanel implements ActionListener {
 
                 System.out.println("test: " + testClassFolder);
 
-
-
+                SwingWorker sw = new SwingWorker() {
+                    @Override
+                    protected Object doInBackground() throws Exception {
+                        Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder));
+                        return null;
+                    }
+                };
+                sw.execute();
+                String message = "Testing... \nTo quit press \'Cancel\'";
+                int option = JOptionPane.showConfirmDialog(new JFrame(), message, "One moment...", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    System.exit(0);
+                }
             } else {
-                String message = "Dit is niet goed jongeh!";
+                String message = "Dit is niet goed jonguhh!";
                 JOptionPane.showMessageDialog(new JFrame(), message, "ERROR!", JOptionPane.ERROR_MESSAGE);
-
             }
         } else if (e.getActionCommand().equals(firstClass.getActionCommand())) {
-            choosertitle = "First folder";
+            chooserTitle = "First folder";
             firstClassFolder = chooseFolder();
         } else if (e.getActionCommand().equals(secondClass.getActionCommand())) {
-            choosertitle = "Second folder";
+            chooserTitle = "Second folder";
             secondClassFolder = chooseFolder();
         } else if (e.getActionCommand().equals(testClass.getActionCommand())) {
-            choosertitle = "Test folder";
+            chooserTitle = "Test folder";
             testClassFolder = chooseFolder();
         }
     }
@@ -101,7 +113,7 @@ public class GUI extends JPanel implements ActionListener {
         JFileChooser chooser;
         chooser = new JFileChooser();
         chooser.setCurrentDirectory(new java.io.File("."));
-        chooser.setDialogTitle(choosertitle);
+        chooser.setDialogTitle(chooserTitle);
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         //
         // disable the "All files" option.
@@ -121,8 +133,8 @@ public class GUI extends JPanel implements ActionListener {
         return new Dimension(500, 500);
     }
 
-    public static void main(String s[]) {
-        JFrame frame = new JFrame("CLASSIFIER");
+    public static void buildGUI() {
+        JFrame frame = new JFrame("Classifier, (c) Ron van Bree & Gijs Beernink 2016");
         GUI panel = new GUI();
         frame.addWindowListener(
                 new WindowAdapter() {

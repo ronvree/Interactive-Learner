@@ -6,13 +6,9 @@ import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
 import model.processeddocumentset.BinomialDataSet;
 import view.GUI;
-
 import java.io.File;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * Created by Gijs on 06-Jan-16.

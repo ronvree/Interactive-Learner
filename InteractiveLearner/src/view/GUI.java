@@ -82,20 +82,8 @@ public class GUI extends JPanel implements ActionListener {
 
                 System.out.println("test: " + testClassFolder);
 
-                SwingWorker sw = new SwingWorker() {
-                    @Override
-                    protected Object doInBackground() throws Exception {
-                        result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder));
-                        showResults();
-                        return null;
-                    }
-                };
-                sw.execute();
-                String message = "Testing... \nTo quit press \'Cancel\'";
-                int option = JOptionPane.showConfirmDialog(new JFrame(), message, "One moment...", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    System.exit(0);
-                }
+                result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder));
+                showResults();
             } else {
                 String message = "Not entered correct data!";
                 JOptionPane.showMessageDialog(new JFrame(), message, "ERROR!", JOptionPane.ERROR_MESSAGE);

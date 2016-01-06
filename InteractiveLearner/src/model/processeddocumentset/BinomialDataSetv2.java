@@ -37,11 +37,11 @@ public class BinomialDataSetv2 implements ProcessedDocumentSet {
 	 */
 	private Map<String, Map<String, Integer>> frequencies;
 	
-	public BinomialDataSetv2(File src1, File src2)	{
-		this.srcFile1 = src1;
-		this.srcFile2 = src2;
-		this.class1 = src1.getName();
-		this.class2 = src2.getName();
+	public BinomialDataSetv2(File first, String firstName, File second, String secondName)	{
+		this.srcFile1 = first;
+		this.srcFile2 = second;
+		this.class1 = firstName;
+		this.class2 = secondName;
 		this.documents = new ArrayList<ProcessedDocument>();
 		this.frequencies = new HashMap<String, Map<String, Integer>>();
 		this.frequencies.put(class1, new HashMap<String, Integer>());

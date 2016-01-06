@@ -1,13 +1,13 @@
 package testing;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Date;
 
 import model.classifiers.Classifier;
 import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
 import model.processeddocumentset.BinomialDataSet;
+import model.processeddocumentset.BinomialDataSetv2;
+import model.processeddocumentset.ProcessedDocumentSet;
 
 public class testClassifier {
 	
@@ -41,7 +41,7 @@ public class testClassifier {
 			long time = System.currentTimeMillis();
 			File f1 = new File("data" + File.separator + "spam");
 			File f2 = new File("data" + File.separator + "ham");
-			BinomialDataSet docset = new BinomialDataSet(f1, f2);
+			ProcessedDocumentSet docset = new BinomialDataSet(f1, f2);
 			Classifier NB = new NaiveBayes("spam", "ham");
 			NB.train(docset);
 

@@ -102,6 +102,13 @@ public class BinomialDataSetv2 implements ProcessedDocumentSet {
 		}
 		return count;
 	}
+	
+	@Override
+	public List<String> getWords()	{
+		List<String> result = new ArrayList<String>(this.frequencies.get(class1).keySet());
+		result.addAll(this.frequencies.get(class2).keySet());
+		return result;
+	}
 
 	@Override
 	public void put(Document document, String classification) {

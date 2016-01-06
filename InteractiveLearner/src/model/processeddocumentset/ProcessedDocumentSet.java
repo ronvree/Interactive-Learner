@@ -1,5 +1,7 @@
 package model.processeddocumentset;
 
+import java.util.List;
+
 import model.document.Document;
 import model.document.processed.ProcessedDocument;
 
@@ -44,6 +46,11 @@ public interface ProcessedDocumentSet {
 	 * @param classification
 	 */
 	public int wordCount(String classification);
+	
+	/**
+	 * Returns all words that have been processed
+	 */
+	public List<String> getWords();
 	
 	/**
 	 * Put a new document in the set

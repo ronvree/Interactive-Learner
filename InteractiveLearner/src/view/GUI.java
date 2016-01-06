@@ -68,7 +68,7 @@ public class GUI extends JPanel implements ActionListener {
         if (e.getActionCommand().equals(runTest.getActionCommand())) {
             firstClassNameValue = firstClassName.getText();
             secondClassNameValue = secondClassName.getText();
-            if (firstClassFolder != null && secondClassFolder != null && testClassFolder != null && firstClassName != null && secondClassName != null) {
+            if (firstClassFolder != null && secondClassFolder != null && testClassFolder != null && !firstClassNameValue.equals("") && !secondClassNameValue.equals("")) {
                 System.out.println("First: " + firstClassFolder);
                 System.out.println("first name: " + firstClassNameValue);
 
@@ -80,7 +80,9 @@ public class GUI extends JPanel implements ActionListener {
 
 
             } else {
-//            TODO
+                String message = "Dit is niet goed jongeh!";
+                JOptionPane.showMessageDialog(new JFrame(), message, "ERROR!", JOptionPane.ERROR_MESSAGE);
+
             }
         } else if (e.getActionCommand().equals(firstClass.getActionCommand())) {
             choosertitle = "First folder";

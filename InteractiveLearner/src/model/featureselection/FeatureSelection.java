@@ -1,5 +1,6 @@
 package model.featureselection;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ public abstract class FeatureSelection {
 	
 	public FeatureSelection(ProcessedDocumentSet dataSet)	{
 		this.dataSet = dataSet;
-		
+		this.scores = new HashMap<String, Integer>();
 	}
 	
 	public void update()	{
@@ -26,6 +27,10 @@ public abstract class FeatureSelection {
 	public void update(String word)	{
 		int score = this.score(word);
 		this.scores.put(word, new Integer(score));
+	}
+	
+	public List<String> getSelectedWords()	{
+		return this.select(this.scores);
 	}
 	
 	public abstract int score(String word);

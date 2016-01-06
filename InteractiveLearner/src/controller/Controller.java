@@ -8,7 +8,6 @@ import model.processeddocumentset.BinomialDataSet;
 import view.GUI;
 import java.io.File;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Scanner;
 
 /**

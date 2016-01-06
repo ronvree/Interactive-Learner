@@ -3,7 +3,7 @@ package testing;
 import java.io.File;
 
 import model.classifiers.Classifier;
-import model.classifiers.NaiveBayes;
+import model.classifiers.FSNaiveBayes;
 import model.document.StandardDocument;
 import model.processeddocumentset.BinomialDataSet;
 import model.processeddocumentset.ProcessedDocumentSet;
@@ -18,7 +18,7 @@ public class testClassifier {
 			File f1 = new File("InteractiveLearner" + File.separator + "data" + File.separator + "spam");
 			File f2 = new File("InteractiveLearner" + File.separator + "data" + File.separator + "ham");
 			ProcessedDocumentSet docset = new BinomialDataSet(f1, f2);
-			Classifier NB = new NaiveBayes("spam", "ham");
+			Classifier NB = new FSNaiveBayes("spam", "ham");
 			NB.train(docset);
 
 			File testSet = new File("InteractiveLearner" + File.separator + "data" + File.separator + "testSet");
@@ -41,7 +41,7 @@ public class testClassifier {
 			File f1 = new File("data" + File.separator + "spam");
 			File f2 = new File("data" + File.separator + "ham");
 			ProcessedDocumentSet docset = new BinomialDataSet(f1, f2);
-			Classifier NB = new NaiveBayes("spam", "ham");
+			Classifier NB = new FSNaiveBayes("spam", "ham");
 			NB.train(docset);
 
 //			File testSet = new File("src" + File.separator + "data" + File.separator + "testSet");

@@ -8,7 +8,7 @@ public class TestDocumentSet {
 
 	public static void main(String[] args) {
 		
-		String location = "InteractiveLearner/src/dataset/";
+		String location = "src/dataset/";
 		String c1 = "ham";
 		String c2 = "spam";
 		
@@ -21,7 +21,7 @@ public class TestDocumentSet {
 		System.out.println("Nr of " + c2 + ": " + docset.size(c2));
 		System.out.println();
 		
-		String s = "viagra";
+		String s = "erect";
 		
 		System.out.println("Nr of words: " + docset.wordCount());
 		System.out.println("Freq of " + s + ": " + docset.getFrequency(s));

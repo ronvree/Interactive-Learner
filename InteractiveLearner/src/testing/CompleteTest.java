@@ -87,7 +87,6 @@ public class CompleteTest {
                 }
             } else if (mail) {
                 if (key.contains("sp")) {
-                    System.out.println("key.contains(\"p\"): " + key.contains("p"));
                     if (value.toLowerCase().contains("s")) {
                         endResult.put(key, "Y");
                     } else if (value.toLowerCase().contains("h")) {
@@ -96,7 +95,6 @@ public class CompleteTest {
                         endResult.put(key, "U");
                     }
                 } else if (!key.contains("sp")) {
-                    System.out.println("!key.contains(\"p\"): " + !key.contains("p"));
                     if (value.toLowerCase().contains("h")) {
                         endResult.put(key, "Y");
                     } else if (value.toLowerCase().contains("s")) {

@@ -22,34 +22,28 @@ public class FSNaiveBayes implements Classifier {
 
 	@Override
 	public String classify(Document document) {
-		String[] normalized = DocumentProcessor.normalize(document);
+		String[] normalized = DocumentProcessor.normalize(document);	// Normalize
 		
-		List<String> selected1 = this.filter(normalized, classification1);
-		List<String> selected2 = this.filter(normalized, classification2);
+		List<String> words1 = this.filter(normalized, classification1);	// Feature selection
+		List<String> words2 = this.filter(normalized, classification2);
 
-		double wordCount = (double) kb.wordCount();
+		double wordCount = (double) kb.wordCount();						// Total word count
+		double wordCount1 = (double) kb.wordCount(classification1); 	// Word count in category 1
+		double wordCount2 = (double) kb.wordCount(classification2); 	// Word count in category 2
 		
 		double chanceWordsGivenClassification1 = 0;
 		double chanceWordsGivenClassification2 = 0;
-		for (String word : selected1) {
-			chanceWordsGivenClassification1 = chanceWordsGivenClassification1 + (Math.log(((double) kb.getFrequency(word, classification1) + 1) / ((double) kb.wordCount(classification1) + 1)));
+		for (String word : words1) {
+			chanceWordsGivenClassification1 += (Math.log(((double) kb.getFrequency(word, classification1) + 1) / (wordCount1 + 1)));
 		}
-		for (String word : selected2)	{
-			chanceWordsGivenClassification2 = chanceWordsGivenClassification2 + (Math.log(((double) kb.getFrequency(word, classification2) + 1) / ((double) kb.wordCount(classification2) + 1)));
+		for (String word : words2)	{
+			chanceWordsGivenClassification2 += (Math.log(((double) kb.getFrequency(word, classification2) + 1) / (wordCount2 + 1)));
 		}
-		double chanceClassification1 = (double) kb.wordCount(classification1) / wordCount;
-		double chanceClassification2 = (double) kb.wordCount(classification2) / wordCount;
 		
-		double chance1 = Math.log(chanceClassification1) + chanceWordsGivenClassification1;
-		double chance2 = Math.log(chanceClassification2) + chanceWordsGivenClassification2;
+		double chance1 = Math.log(wordCount1 / wordCount) + chanceWordsGivenClassification1;
+		double chance2 = Math.log(wordCount2 / wordCount) + chanceWordsGivenClassification2;
 		
-		String result;
-		if(chance1 > chance2) {
-			result = classification1;
-		} else {
-			result = classification2;
-		}
-
+		String result = (chance1 > chance2)? classification1:classification2;
 		System.out.println("This document has been classified as: " + result);
 		return result;
 	}
@@ -61,6 +55,9 @@ public class FSNaiveBayes implements Classifier {
 		fs.update();
 	}
 	
+	/**
+	 * Perform feature selection
+	 */
 	private List<String> filter(String[] words, String classification)	{
 		List<String> selected = this.fs.getSelectedWords(classification);
 		List<String> result = new ArrayList<String>();

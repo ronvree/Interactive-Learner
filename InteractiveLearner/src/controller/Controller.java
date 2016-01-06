@@ -3,7 +3,7 @@ package controller;
 import model.classifiers.Classifier;
 import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
-import model.processeddocumentset.BinomialDataSetv2;
+import model.processeddocumentset.BinomialDataSet;
 import view.GUI;
 
 import java.io.File;
@@ -24,7 +24,7 @@ public class Controller implements Serializable {
 	public static HashMap runTest(File first, String firstName, File second, String secondName, File test) {
         HashMap<String, String> result = new HashMap<>();
 		long time = System.currentTimeMillis();
-		BinomialDataSetv2 docset = new BinomialDataSetv2(first, firstName, second, secondName);
+		BinomialDataSet docset = new BinomialDataSet(first, firstName, second, secondName);
 		Classifier NB = new NaiveBayes(firstName, secondName);
 		NB.train(docset);
 		int counter = 1;

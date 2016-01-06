@@ -52,9 +52,9 @@ public class Controller implements Serializable {
         Pattern mail2;
         HashMap<String, String> endResult = new HashMap<>();
         try {
-            blog = Pattern.compile("/[FM]................../");
-            mail1 = Pattern.compile("/[0-9]...................../");
-            mail2 = Pattern.compile("/[spm]......................./");
+            blog = Pattern.compile("/[FM].test[0-9]*/ ");
+            mail1 = Pattern.compile("/[0-9].[0-9]*...[0-9]/ ");
+            mail2 = Pattern.compile("/spmsg[abcd][0-9]*/ ");
 
 
         for (String key : result.keySet()) {
@@ -62,6 +62,9 @@ public class Controller implements Serializable {
             Matcher blogMatcher = blog.matcher(key);
             Matcher mail1Matcher = mail1.matcher(key);
             Matcher mail2Matcher = mail2.matcher(key);
+            System.out.println("blogmatcher: " + blogMatcher.toString() + "\nBlogmatcher matches: " + blogMatcher.matches());
+            System.out.println("\nmail1matcher: " + mail1Matcher.toString() + "\nmail1matcher matches: " + mail1Matcher.matches());
+            System.out.println("\nmail2matcher: " + mail2Matcher.toString() + "\nmail2matcher matches: " + mail2Matcher.matches());
             if (blogMatcher.matches()) {
                 if (key.startsWith("F")) {
                     if (value.startsWith("F")) {

@@ -1,11 +1,11 @@
 package testing;
 
+import java.io.File;
+
 import model.classifiers.Classifier;
 import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
-import model.processeddocumentset.BinomialDataSetv2;
-
-import java.io.File;
+import model.processeddocumentset.BinomialDataSet;
 
 /**
  * Created by Gijs on 06-Jan-16.
@@ -30,7 +30,7 @@ public class testClassifierV2 {
         String result = "None";
         System.out.println("START");
         long time = System.currentTimeMillis();
-        BinomialDataSetv2 docset = new BinomialDataSetv2(first, firstName, second, secondName);
+        BinomialDataSet docset = new BinomialDataSet(first, firstName, second, secondName);
         Classifier NB = new NaiveBayes(firstName, secondName);
         NB.train(docset);
         int counter = 1;

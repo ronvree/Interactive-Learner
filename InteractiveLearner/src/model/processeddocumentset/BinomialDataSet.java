@@ -2,20 +2,18 @@ package model.processeddocumentset;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import model.document.Document;
 import model.document.StandardDocument;
 import model.document.processed.ProcessedDocument;
 import model.documentprocessor.DocumentProcessor;
 
-/**
- * Capable of storing Documents with two different classifications. Data about frequency can be queried easily.
- * @author Ron
- *
- */
 public class BinomialDataSet implements ProcessedDocumentSet {
 	
 	/**
@@ -36,9 +34,19 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	private List<ProcessedDocument> documents;
 	
 	/**
-	 * Map containing the frequency of each word, for both classifications.
+	 * Map containing the word count for both classifications
 	 */
-	private Map<String, Map<String, Integer>> frequencies;
+	private Map<String, Integer> wordCounts;
+	
+	/**
+	 * Map containing the amount each word occurs in a document, for both classifications.
+	 */
+	private Map<String, Map<String, Integer>> docFrequencies;
+	
+	/**
+	 * Map containing document count for each classification
+	 */
+	private Map<String, Integer> documentCount;
 	
 	public BinomialDataSet(File src1, File src2)	{
 		this.srcFile1 = src1;
@@ -46,9 +54,25 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 		this.class1 = src1.getName();
 		this.class2 = src2.getName();
 		this.documents = new ArrayList<ProcessedDocument>();
-		this.frequencies = new HashMap<String, Map<String, Integer>>();
-		this.frequencies.put(class1, new HashMap<String, Integer>());
-		this.frequencies.put(class2, new HashMap<String, Integer>());
+		this.docFrequencies = new HashMap<String, Map<String, Integer>>();
+		this.docFrequencies.put(class1, new HashMap<String, Integer>());
+		this.docFrequencies.put(class2, new HashMap<String, Integer>());
+		this.documentCount = new HashMap<String, Integer>();
+		this.wordCounts = new HashMap<String, Integer>();
+		this.reset();
+	}
+	
+	public BinomialDataSet(File src1, String firstName, File src2, String secondName)	{
+		this.srcFile1 = src1;
+		this.srcFile2 = src2;
+		this.class1 = firstName;
+		this.class2 = secondName;
+		this.documents = new ArrayList<ProcessedDocument>();
+		this.docFrequencies = new HashMap<String, Map<String, Integer>>();
+		this.docFrequencies.put(class1, new HashMap<String, Integer>());
+		this.docFrequencies.put(class2, new HashMap<String, Integer>());
+		this.documentCount = new HashMap<String, Integer>();
+		this.wordCounts = new HashMap<String, Integer>();
 		this.reset();
 	}
 	
@@ -59,9 +83,15 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 
 	@Override
 	public int getFrequency(String word) {
-		Integer count1 = this.frequencies.get(class1).get(word);
-		Integer count2 = this.frequencies.get(class2).get(word);
+		Integer count1 = this.docFrequencies.get(class1).get(word);
+		Integer count2 = this.docFrequencies.get(class2).get(word);
 		return  ((count1 != null)? count1:0) + ((count2 != null)? count2:0);
+	}
+
+	@Override
+	public int getFrequency(String word, String classification) {
+		Integer count = this.docFrequencies.get(classification).get(word);
+		return count != null? count:0;
 	}
 
 	@Override
@@ -70,43 +100,27 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	}
 	
 	@Override
-	public int wordCount()	{
-		int count = 0;
-		for (String c : this.frequencies.keySet())	{
-			for (String w : this.frequencies.get(c).keySet())	{
-				count += this.frequencies.get(c).get(w);
-			}
-		}
-		return count;
+	public int size(String classification) {
+		return this.documentCount.get(class1) + this.documentCount.get(class2);
 	}
-	
+
 	@Override
-	public int wordCount(String classification)	{
-		int count = 0;
-		for (String word : this.frequencies.get(classification).keySet())	{
-			count += this.frequencies.get(classification).get(word);
-		}
-		return count;
+	public int wordCount() {
+		return this.wordCount(class1) + this.wordCount(class2);
 	}
-	
+
 	@Override
-	public int size(String classification)	{
-		int count = 0;
-		for (ProcessedDocument doc : this.documents)	{
-			if (doc.getClassification().equals(classification))	{
-				count++;
-			}
-		}
-		return count;
+	public int wordCount(String classification) {
+		return this.wordCounts.get(classification);
 	}
-	
+
 	@Override
 	public List<String> getWords()	{
-		List<String> result = new ArrayList<String>(this.frequencies.get(class1).keySet());
-		result.addAll(this.frequencies.get(class2).keySet());
+		List<String> result = new ArrayList<String>(this.docFrequencies.get(class1).keySet());
+		result.addAll(this.docFrequencies.get(class2).keySet());
 		return result;
 	}
-	
+
 	@Override
 	public List<String> getClassifications()	{
 		List<String> result = new ArrayList<String>();
@@ -118,11 +132,11 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	@Override
 	public void put(Document document, String classification) {
 		this.documents.add(new ProcessedDocument(document, classification));
-		
-		String[] words = DocumentProcessor.normalize(document);
-		
-		Map<String, Integer> frequency = this.frequencies.get(classification);
+		this.documentCount.put(classification, this.documentCount.get(classification) + 1);
+		Set<String> words = new HashSet<String>(Arrays.asList(DocumentProcessor.normalize(document)));
+		Map<String, Integer> frequency = this.docFrequencies.get(classification);
 		for (String word : words)	{
+			this.wordCounts.put(classification, this.wordCounts.get(classification) + 1);
 			if (!frequency.containsKey(word))	{
 				frequency.put(word, new Integer(1));
 			} else {
@@ -150,14 +164,14 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	@Override
 	public void clear() {
 		this.documents.clear();
-		this.frequencies.get(class1).clear();
-		this.frequencies.get(class2).clear();
-	}
-
-	@Override
-	public int getFrequency(String word, String classification) {
-		Integer count = this.frequencies.get(classification).get(word);
-		return count != null? count:0;
+		this.docFrequencies.get(class1).clear();
+		this.docFrequencies.get(class2).clear();
+		this.documentCount.clear();
+		this.documentCount.put(class1, 0);
+		this.documentCount.put(class2, 0);
+		this.wordCounts.clear();
+		this.wordCounts.put(class1, 0);
+		this.wordCounts.put(class2, 0);
 	}
 
 

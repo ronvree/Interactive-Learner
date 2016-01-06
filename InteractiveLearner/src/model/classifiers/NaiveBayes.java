@@ -24,7 +24,7 @@ public class NaiveBayes implements Classifier {
 		 */
 		double changeWordsGivenClassification = 0;
 		for (String word : normalized) {
-			changeWordsGivenClassification = changeWordsGivenClassification + (Math.log(((double) kb.getFrequency(word, classification1) + 1) / ((double) kb.wordCount(classification1) + 1)));
+			changeWordsGivenClassification += (Math.log(((double) kb.getFrequency(word, classification1) + 1) / ((double) kb.wordCount(classification1) + 1)));
 		}
 		double changeClassification = (double) kb.wordCount(classification1) / wordCount;
 		double changeClassificationGivenWords = Math.log(changeClassification) + changeWordsGivenClassification;

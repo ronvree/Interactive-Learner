@@ -1,9 +1,6 @@
 package testing;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-
 import model.classifiers.Classifier;
 import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
@@ -16,13 +13,13 @@ public class testClassifier {
 		try {
 			System.out.println("START");
 			long time = System.currentTimeMillis();
-			File f1 = new File("InteractiveLearner" + File.separator + "data" + File.separator + "spam");
-			File f2 = new File("InteractiveLearner" + File.separator + "data" + File.separator + "ham");
+			File f1 = new File("InteractiveLearner" + File.separator + "blogData" + File.separator + "Male");
+			File f2 = new File("InteractiveLearner" + File.separator + "blogData" + File.separator + "Female");
 			BinomialDataSet docset = new BinomialDataSet(f1, f2);
-			Classifier NB = new NaiveBayes("spam", "ham");
+			Classifier NB = new NaiveBayes("Male", "Female");
 			NB.train(docset);
 
-			File testSet = new File("InteractiveLearner" + File.separator + "data" + File.separator + "testSet");
+			File testSet = new File("InteractiveLearner" + File.separator + "blogData" + File.separator + "testSet");
 			int counter = 1;
 			for (File file : testSet.listFiles()) {
 				System.out.println("File " + counter + " of " + testSet.listFiles().length);

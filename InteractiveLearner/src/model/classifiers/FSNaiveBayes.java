@@ -36,10 +36,18 @@ public class FSNaiveBayes implements Classifier {
 	private ProcessedDocumentSet kb;
 	private String classification1;
 	private String classification2;
+	private boolean filterStopWords;
 
 	public FSNaiveBayes(String classification1, String classification2) {
 		this.classification1 = classification1;
 		this.classification2 = classification2;
+		filterStopWords = false;
+	}
+	
+	public FSNaiveBayes(String classification1, String classification2, boolean filterStopWords) {
+		this.classification1 = classification1;
+		this.classification2 = classification2;
+		this.filterStopWords = filterStopWords;
 	}
 
 	@Override
@@ -84,7 +92,7 @@ public class FSNaiveBayes implements Classifier {
 		List<String> selected = this.fs.getSelectedWords(classification);
 		List<String> result = new ArrayList<String>();
 		for (String word : words)	{
-			if (selected.contains(word) && !STOPWORDS.contains(word))	{
+			if (selected.contains(word) && !(filterStopWords && STOPWORDS.contains(word)))	{
 				result.add(word);
 			}
 		}

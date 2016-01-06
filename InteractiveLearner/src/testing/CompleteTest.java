@@ -1,19 +1,19 @@
 package testing;
 
+import java.io.File;
+import java.util.HashMap;
+
 import model.classifiers.Classifier;
 import model.classifiers.FSNaiveBayes;
 import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
 import model.processeddocumentset.BinomialDataSet;
 import view.GUI;
-import java.io.File;
-import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * Created by Gijs on 06-Jan-16.
  */
-public class CompleteTest implements Serializable {
+public class CompleteTest {
     public CompleteTest() {
         GUI.buildGUI();
     }
@@ -22,15 +22,18 @@ public class CompleteTest implements Serializable {
         HashMap<String, String> result = new HashMap<String, String>();
         long time = System.currentTimeMillis();
         BinomialDataSet docset = new BinomialDataSet(first, firstName, second, secondName);
+        long dataSetCreatedIn = System.currentTimeMillis() - time;
         Classifier NB;
         if (useFeatureSelection) {
             NB = new FSNaiveBayes(firstName, secondName, removeStopWords);
         } else {
             NB = new NaiveBayes(firstName, secondName);
         }
-
+        time = System.currentTimeMillis();
         NB.train(docset);
+        long trainTime = System.currentTimeMillis() - time;
         int counter = 1;
+        time = System.currentTimeMillis();
         for (File file : test.listFiles()) {
             System.out.println("File " + counter + " of " + test.listFiles().length);
             counter++;
@@ -39,8 +42,10 @@ public class CompleteTest implements Serializable {
             System.out.println();
             result.put(file.getName(), classification);
         }
-        long calculateTime = System.currentTimeMillis() - time;
-        result.put("Time", String.valueOf(calculateTime));
+        long classificationTime = System.currentTimeMillis() - time;
+        result.put("Dataset instantiated in ms: ", String.valueOf(dataSetCreatedIn));
+        result.put("Trained in ms: ", String.valueOf(trainTime));
+        result.put("Classified in ms: ", String.valueOf(classificationTime));
         double percentage = checkResult(result);
         result.put("Percentage", String.valueOf(percentage));
         return result;
@@ -82,7 +87,6 @@ public class CompleteTest implements Serializable {
                 }
             } else if (mail) {
                 if (key.contains("sp")) {
-                    System.out.println("key.contains(\"p\"): " + key.contains("p"));
                     if (value.toLowerCase().contains("s")) {
                         endResult.put(key, "Y");
                     } else if (value.toLowerCase().contains("h")) {
@@ -91,7 +95,6 @@ public class CompleteTest implements Serializable {
                         endResult.put(key, "U");
                     }
                 } else if (!key.contains("sp")) {
-                    System.out.println("!key.contains(\"p\"): " + !key.contains("p"));
                     if (value.toLowerCase().contains("h")) {
                         endResult.put(key, "Y");
                     } else if (value.toLowerCase().contains("s")) {

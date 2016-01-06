@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -107,7 +108,9 @@ public class GUI extends JPanel implements ActionListener {
 
     public void showResults() {
         JFrame frame = new JFrame("Results");
-
+        ArrayList<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+        String time = result.get("Time");
+        result.remove("Time");
         frame.addWindowListener(
                 new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
@@ -115,31 +118,44 @@ public class GUI extends JPanel implements ActionListener {
                     }
                 }
         );
-        String text = "Results:";
+
+        String text = "Please uncheck box if incorrect classification:";
+
+        JTextField textField = new JTextField(text);
+        textField.setFont(new Font("Arial", Font.PLAIN, 16));
+        textField.setEditable(false);
+
+        frame.add(textField);
+        textField.setVisible(true);
+
+        JScrollPane areaScrollPane = new JScrollPane();
+
         for (String key : this.result.keySet()) {
-            if (!(key.equals("Time") || key.equals("Percentage"))) {
-                text += "\n" + key + ": " + this.result.get(key);
-            }
+            Panel panel = new Panel();
+            JCheckBox jcb = new JCheckBox("File " + key + ": " + this.result.get(key), true);
+            checkBoxes.add(jcb);
+            panel.add(jcb);
+            jcb.setVisible(true);
+            areaScrollPane.add(panel);
         }
-        text += "\nThis took: " + result.get("Time") + " milliseconds";
-        text += "\nPercentage correctly classified: " + result.get("Percentage") + "%";
-        System.out.println(text);
 
-        JTextArea textArea = new JTextArea(text);
-        textArea.setFont(new Font("Arial", Font.PLAIN, 16));
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        textArea.setEditable(false);
+        System.out.println(checkBoxes.size());
 
-        JScrollPane areaScrollPane = new JScrollPane(textArea);
         areaScrollPane.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         areaScrollPane.setSize(getPreferredSize());
-        frame.setSize(getPreferredSize());
+        frame.setSize(250, 500);
         frame.add(areaScrollPane);
         frame.setVisible(true);
         areaScrollPane.setVisible(true);
         frame.setAlwaysOnTop(true);
+
+
+
+        frame.setSize(250, 500);
+        frame.setVisible(true);
+        frame.setAlwaysOnTop(true);
+        frame.setResizable(true);
     }
 
     public String chooseFolder() throws NullPointerException {

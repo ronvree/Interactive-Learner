@@ -18,8 +18,8 @@ public class CompleteTest implements Serializable {
         GUI.buildGUI();
     }
 
-    public static HashMap runTest(File first, String firstName, File second, String secondName, File test, boolean useFeatureSelection, boolean removeStopWords) {
-        HashMap<String, String> result = new HashMap<>();
+    public static HashMap<String, String> runTest(File first, String firstName, File second, String secondName, File test, boolean useFeatureSelection, boolean removeStopWords) {
+        HashMap<String, String> result = new HashMap<String, String>();
         long time = System.currentTimeMillis();
         BinomialDataSet docset = new BinomialDataSet(first, firstName, second, secondName);
         Classifier NB;
@@ -50,7 +50,7 @@ public class CompleteTest implements Serializable {
     //    This is only applicable to the test sets we made, because these have their true classification in their filename.
 //    This method is mainly used to easily verify our results.
     public static double checkResult(HashMap<String, String> result) {
-        HashMap<String, String> endResult = new HashMap<>();
+        HashMap<String, String> endResult = new HashMap<String, String>();
         boolean mail = false;
         boolean blog = false;
         for (String key : result.keySet()) {

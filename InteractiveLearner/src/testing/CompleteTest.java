@@ -1,19 +1,19 @@
 package testing;
 
+import java.io.File;
+import java.util.HashMap;
+
 import model.classifiers.Classifier;
 import model.classifiers.FSNaiveBayes;
 import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
 import model.processeddocumentset.BinomialDataSet;
 import view.GUI;
-import java.io.File;
-import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * Created by Gijs on 06-Jan-16.
  */
-public class CompleteTest implements Serializable {
+public class CompleteTest {
     public CompleteTest() {
         GUI.buildGUI();
     }

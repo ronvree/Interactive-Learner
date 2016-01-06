@@ -8,7 +8,7 @@ import model.processeddocumentset.ProcessedDocumentSet;
 
 public class ChiSquared extends FeatureSelection {
 	
-	public static final int THRESHOLD = 1000;
+	public static final int THRESHOLD = 5;
 	
 	public ChiSquared(ProcessedDocumentSet dataSet) {
 		super(dataSet);

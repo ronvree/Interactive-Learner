@@ -1,15 +1,10 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
+import controller.Controller;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,6 +36,7 @@ public class GUI extends JPanel implements ActionListener {
     JCheckBox removeStopWords;
 
     String chooserTitle;
+
 
     HashMap<String, String> result;
 
@@ -104,8 +100,9 @@ public class GUI extends JPanel implements ActionListener {
 
                 System.out.println("test: " + testClassFolder);
 
-                result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder), featureSelection.isSelected(), removeStopWords.isSelected());
-                showResults();
+//                result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder), featureSelection.isSelected(), removeStopWords.isSelected());
+//                showResults();
+                Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder), featureSelection.isSelected(), removeStopWords.isSelected());
             } else {
                 String message = "Not entered correct data!";
                 JOptionPane.showMessageDialog(new JFrame(), message, "ERROR!", JOptionPane.ERROR_MESSAGE);
@@ -122,57 +119,34 @@ public class GUI extends JPanel implements ActionListener {
         }
     }
 
-    public void showResults() {
-        JFrame frame = new JFrame("Results");
-        ArrayList<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
-        String time = result.get("Time");
-        result.remove("Time");
-        frame.addWindowListener(
-                new WindowAdapter() {
-                    public void windowClosing(WindowEvent e) {
-                        System.exit(0);
-                    }
-                }
-        );
-
-        String text = "Please uncheck box if incorrect classification:";
-
-        JTextField textField = new JTextField(text);
-        textField.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField.setEditable(false);
-
-        frame.add(textField);
-        textField.setVisible(true);
-
-        JScrollPane areaScrollPane = new JScrollPane();
-
-        for (String key : this.result.keySet()) {
-            Panel panel = new Panel();
-            JCheckBox jcb = new JCheckBox("File " + key + ": " + this.result.get(key), true);
-            checkBoxes.add(jcb);
-            panel.add(jcb);
-            jcb.setVisible(true);
-            areaScrollPane.add(panel);
-        }
-
-        System.out.println(checkBoxes.size());
-
-        areaScrollPane.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        areaScrollPane.setSize(getPreferredSize());
-        frame.setSize(250, 500);
-        frame.add(areaScrollPane);
-        frame.setVisible(true);
-        areaScrollPane.setVisible(true);
-        frame.setAlwaysOnTop(true);
-
-
-
-        frame.setSize(250, 500);
-        frame.setVisible(true);
-        frame.setAlwaysOnTop(true);
-        frame.setResizable(true);
-    }
+//    public static boolean askUser(File file, String classification) {
+//        JFrame frame = new JFrame("Results");
+//        frame.addWindowListener(
+//                new WindowAdapter() {
+//                    public void windowClosing(WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                }
+//        );
+//
+//        String text = "Please uncheck the box when the classification is not correct.";
+//
+//        JTextField textField = new JTextField(text);
+//        textField.setFont(new Font("Arial", Font.PLAIN, 16));
+//        textField.setEditable(false);
+//        frame.add(textField);
+//        textField.setVisible(true);
+//        JButton correct = new JButton("Correct");
+//        JButton wrong = new JButton("Wrong");
+//
+//        frame.setSize(250, 500);
+//
+//        frame.setVisible(true);
+//        frame.setAlwaysOnTop(true);
+//        frame.setResizable(true);
+//
+//        return ;
+//    }
 
     public String chooseFolder() throws NullPointerException {
         File result = null;
@@ -199,7 +173,7 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     public static void buildGUI() {
-        JFrame frame = new JFrame("Classifier, (c) Ron van Bree & Gijs Beernink 2016");
+        JFrame frame = new JFrame("Classifier, (c) Ron van Bree & Gijs Beernink; 2016");
         GUI panel = new GUI();
         frame.addWindowListener(
                 new WindowAdapter() {

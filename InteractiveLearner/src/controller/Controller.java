@@ -8,20 +8,19 @@ import model.processeddocumentset.BinomialDataSet;
 import view.GUI;
 import java.io.File;
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Created by Gijs on 06-Jan-16.
  */
 public class Controller implements Serializable {
+	GUI gui;
 
     public Controller() {
         GUI.buildGUI();
 	}
 
-	public static HashMap runTest(File first, String firstName, File second, String secondName, File test, boolean useFeatureSelection, boolean removeStopWords) {
-        HashMap<String, String> result = new HashMap<>();
-		long time = System.currentTimeMillis();
+	public static void runTest(File first, String firstName, File second, String secondName, File test, boolean useFeatureSelection, boolean removeStopWords) {
 		BinomialDataSet docset = new BinomialDataSet(first, firstName, second, secondName);
         Classifier NB;
         if (useFeatureSelection) {
@@ -29,16 +28,39 @@ public class Controller implements Serializable {
         } else {
             NB = new NaiveBayes(firstName, secondName);
         }
+
+		Scanner scanner = new Scanner(System.in);
 		NB.train(docset);
-		int counter = 1;
 		for (File file : test.listFiles()) {
-			counter++;
+			boolean goodClassified = true;
+			boolean validInput = false;
 			String classification = NB.classify(new StandardDocument(file));
-            result.put(file.getName(), classification);
+			while (!validInput) {
+				System.out.print(file.getName() + ": " + classification + ". Is this correct? (y/n)");
+				String input = scanner.next();
+				if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
+					goodClassified = true;
+					validInput = true;
+				} else if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")) {
+					goodClassified = false;
+					validInput = true;
+				} else {
+					System.out.println("Not a valid input.");
+				}
+			}
+			if (goodClassified) {
+				docset.put(new StandardDocument(file), classification);
+			} else {
+				if (classification.equals(firstName)) {
+					classification = secondName;
+					docset.put(new StandardDocument(file), classification);
+				} else if (classification.equals(secondName)) {
+					classification = firstName;
+					docset.put(new StandardDocument(file), classification);
+				}
+			}
+			NB.train(docset);
 		}
-        long calculateTime = System.currentTimeMillis() - time;
-        result.put("Time", String.valueOf(calculateTime));
-		return result;
 	}
 
 	public static void main(String[] args) {

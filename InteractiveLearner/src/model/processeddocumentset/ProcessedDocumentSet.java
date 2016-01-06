@@ -53,6 +53,11 @@ public interface ProcessedDocumentSet {
 	public List<String> getWords();
 	
 	/**
+	 * Return all classification
+	 */
+	public List<String> getClassifications();
+	
+	/**
 	 * Put a new document in the set
 	 * @param document -- document
 	 * @param classification -- its classification

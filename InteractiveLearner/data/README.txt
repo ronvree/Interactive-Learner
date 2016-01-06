@@ -2,11 +2,11 @@ System requirements:
     - 8 GB RAM
 
 Software requirements:
-    - Eclipse or IntelliJ
+    - Eclipse or IntelliJ or any other editor
 
 Installation and execute instructions:
     - Unzip the file
-    - Import the project into Eclipse/IntelliJ
+    - Copy src into Eclipse/IntelliJ or any other editor
     - Run Controller.java (src/controller/Controller.java
 
     - To run the automated test run CompleteTest.java.

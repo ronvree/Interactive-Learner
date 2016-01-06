@@ -11,6 +11,10 @@ Installation and execute instructions:
 
     - To run the automated test run CompleteTest.java.
 
+Location of data files:
+    - Doesn't matter as with our program you can choose which files should be trained from and tested on
+
+
 Interaction with GUI:
     - Choose files to train from
     - Choose files to test

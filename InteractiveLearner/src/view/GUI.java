@@ -1,8 +1,6 @@
 package view;
 
 import controller.Controller;
-import testing.testClassifierV2;
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -170,7 +168,7 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     public Dimension getPreferredSize(){
-        return new Dimension(500, 500);
+        return new Dimension(500, 200);
     }
 
     public static void buildGUI() {

@@ -22,6 +22,8 @@ public class GUI extends JPanel implements ActionListener {
     JTextField secondClassName;
     String firstClassNameValue;
     String secondClassNameValue;
+    JCheckBox fs;
+    boolean useFeatureSelection = true;
 
     String chooserTitle;
 
@@ -36,7 +38,14 @@ public class GUI extends JPanel implements ActionListener {
         secondClassName = new JTextField("Please enter second class name");
 
         runTest = new JButton("Run test!");
-
+        fs = new JCheckBox("Use feature selection", true);
+        fs.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("useFeatureSelection: " + fs.isSelected());
+                useFeatureSelection = fs.isSelected();
+            }
+        });
         firstClass.addActionListener(this);
         secondClass.addActionListener(this);
         testClass.addActionListener(this);
@@ -60,6 +69,8 @@ public class GUI extends JPanel implements ActionListener {
         add(secondClassName);
 
         add(testClass);
+        add(fs);
+
         add(runTest);
 
         firstClass.setVisible(true);
@@ -67,6 +78,7 @@ public class GUI extends JPanel implements ActionListener {
         testClass.setVisible(true);
         firstClassName.setVisible(true);
         secondClassName.setVisible(true);
+        fs.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -82,7 +94,7 @@ public class GUI extends JPanel implements ActionListener {
 
                 System.out.println("test: " + testClassFolder);
 
-                result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder));
+                result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder), useFeatureSelection);
                 showResults();
             } else {
                 String message = "Not entered correct data!";

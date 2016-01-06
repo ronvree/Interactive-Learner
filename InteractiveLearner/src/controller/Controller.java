@@ -18,14 +18,12 @@ public class Controller implements Serializable {
         GUI.buildGUI();
 	}
 
-    public static final boolean USE_FEATURE_SELECTION = true;
-
-	public static HashMap runTest(File first, String firstName, File second, String secondName, File test) {
+	public static HashMap runTest(File first, String firstName, File second, String secondName, File test, boolean useFeatureSelection) {
         HashMap<String, String> result = new HashMap<>();
 		long time = System.currentTimeMillis();
 		BinomialDataSet docset = new BinomialDataSet(first, firstName, second, secondName);
         Classifier NB;
-        if (USE_FEATURE_SELECTION) {
+        if (useFeatureSelection) {
             NB = new FSNaiveBayes(firstName, secondName);
         } else {
             NB = new NaiveBayes(firstName, secondName);

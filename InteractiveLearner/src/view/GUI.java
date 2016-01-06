@@ -80,7 +80,7 @@ public class GUI extends JPanel implements ActionListener {
         if (e.getActionCommand().equals(runTest.getActionCommand())) {
             firstClassNameValue = firstClassName.getText();
             secondClassNameValue = secondClassName.getText();
-            if (firstClassFolder != null && secondClassFolder != null && testClassFolder != null && !firstClassNameValue.equals("") && !secondClassNameValue.equals("")) {
+            if (firstClassFolder != null && secondClassFolder != null && testClassFolder != null && !firstClassNameValue.equals("") && !secondClassNameValue.equals("") && !firstClassNameValue.equals("Please enter first class name") && !secondClassNameValue.equals("Please enter second class name") ) {
                 System.out.println("First: " + firstClassFolder);
                 System.out.println("first name: " + firstClassNameValue);
 

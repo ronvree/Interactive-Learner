@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.*;
+import java.util.HashMap;
 
 
 public class GUI extends JPanel implements ActionListener {
@@ -23,6 +24,8 @@ public class GUI extends JPanel implements ActionListener {
     String secondClassNameValue;
 
     String chooserTitle;
+
+    HashMap<String, String> result;
 
     public GUI() {
         firstClass = new JButton("Choose first train folder");
@@ -82,7 +85,8 @@ public class GUI extends JPanel implements ActionListener {
                 SwingWorker sw = new SwingWorker() {
                     @Override
                     protected Object doInBackground() throws Exception {
-                        Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder));
+                        result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder));
+                        showResults();
                         return null;
                     }
                 };
@@ -93,7 +97,7 @@ public class GUI extends JPanel implements ActionListener {
                     System.exit(0);
                 }
             } else {
-                String message = "Dit is niet goed jonguhh!";
+                String message = "Not entered correct data!";
                 JOptionPane.showMessageDialog(new JFrame(), message, "ERROR!", JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getActionCommand().equals(firstClass.getActionCommand())) {
@@ -108,23 +112,59 @@ public class GUI extends JPanel implements ActionListener {
         }
     }
 
+    public void showResults() {
+        JFrame frame = new JFrame("Results");
+
+        frame.addWindowListener(
+                new WindowAdapter() {
+                    public void windowClosing(WindowEvent e) {
+                        System.exit(0);
+                    }
+                }
+        );
+        String text = "Results:";
+        for (String key : this.result.keySet()) {
+            if (!(key.equals("Time") || key.equals("Percentage"))) {
+                text += "\n" + key + ": " + this.result.get(key);
+            }
+        }
+        text += "\nThis took: " + result.get("Time") + " milliseconds";
+        text += "\nPercentage correctly classified: " + result.get("Percentage") + "%";
+        System.out.println(text);
+
+        JTextArea textArea = new JTextArea(text);
+        textArea.setFont(new Font("Arial", Font.PLAIN, 16));
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+
+        JScrollPane areaScrollPane = new JScrollPane(textArea);
+        areaScrollPane.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        areaScrollPane.setSize(getPreferredSize());
+        frame.setSize(getPreferredSize());
+        frame.add(areaScrollPane);
+        frame.setVisible(true);
+        areaScrollPane.setVisible(true);
+        frame.setAlwaysOnTop(true);
+    }
+
     public String chooseFolder() throws NullPointerException {
         File result = null;
-        JFileChooser chooser;
-        chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new java.io.File("."));
-        chooser.setDialogTitle(chooserTitle);
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        //
-        // disable the "All files" option.
-        //
-        chooser.setAcceptAllFileFilterUsed(false);
-        //
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-           result = chooser.getSelectedFile();
-        }
-        else {
-            System.out.println("No Selection");
+        try {
+            JFileChooser chooser;
+            chooser = new JFileChooser();
+            chooser.setCurrentDirectory(new java.io.File("."));
+            chooser.setDialogTitle(chooserTitle);
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setAcceptAllFileFilterUsed(false);
+            if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                result = chooser.getSelectedFile();
+            } else {
+                System.out.println("No Selection");
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
         }
         return result.toString();
     }

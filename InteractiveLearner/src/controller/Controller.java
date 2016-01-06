@@ -1,6 +1,7 @@
 package controller;
 
 import model.classifiers.Classifier;
+import model.classifiers.FSNaiveBayes;
 import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
 import model.processeddocumentset.BinomialDataSet;
@@ -47,37 +48,29 @@ public class Controller implements Serializable {
 //    This is only applicable to the test sets we made, because these have their true classification in their filename.
 //    This method is mainly used to easily verify our results.
     public static double checkResult(HashMap<String, String> result) {
-        Pattern blog;
-        Pattern mail1;
-        Pattern mail2;
         HashMap<String, String> endResult = new HashMap<>();
-        try {
-            blog = Pattern.compile("/[FM].test[0-9]*/ ");
-            mail1 = Pattern.compile("/[0-9].[0-9]*...[0-9]/ ");
-            mail2 = Pattern.compile("/spmsg[abcd][0-9]*/ ");
-
-
+        boolean mail = false;
+        boolean blog = false;
         for (String key : result.keySet()) {
             String value = result.get(key);
-            Matcher blogMatcher = blog.matcher(key);
-            Matcher mail1Matcher = mail1.matcher(key);
-            Matcher mail2Matcher = mail2.matcher(key);
-            System.out.println("blogmatcher: " + blogMatcher.toString() + "\nBlogmatcher matches: " + blogMatcher.matches());
-            System.out.println("\nmail1matcher: " + mail1Matcher.toString() + "\nmail1matcher matches: " + mail1Matcher.matches());
-            System.out.println("\nmail2matcher: " + mail2Matcher.toString() + "\nmail2matcher matches: " + mail2Matcher.matches());
-            if (blogMatcher.matches()) {
+            if (key.contains("msg")) {
+                mail = true;
+            } else if (key.contains("F") || key.contains("M")) {
+                blog = true;
+            }
+            if (blog) {
                 if (key.startsWith("F")) {
-                    if (value.startsWith("F")) {
+                    if (value.toLowerCase().contains("female")) {
                         endResult.put(key, "Y");
-                    } else if (value.startsWith("M")) {
+                    } else if (value.toLowerCase().contains("male")) {
                         endResult.put(key, "N");
                     } else {
                         endResult.put(key, "U");
                     }
                 } else if (key.startsWith("M")) {
-                    if (value.startsWith("M")) {
+                    if (value.toLowerCase().contains("male")) {
                         endResult.put(key, "Y");
-                    } else if (value.startsWith("F")) {
+                    } else if (value.toLowerCase().contains("female")) {
                         endResult.put(key, "N");
                     } else {
                         endResult.put(key, "U");
@@ -85,19 +78,21 @@ public class Controller implements Serializable {
                 } else {
                     System.out.println("Fout bij checken van het resultaat van file: " + key);
                 }
-            } else if (mail1Matcher.matches() || mail2Matcher.matches()) {
-                if (mail1Matcher.matches()) {
-                    if (value.startsWith("H")) {
+            } else if (mail) {
+                if (key.contains("sp")) {
+                    System.out.println("key.contains(\"p\"): " + key.contains("p"));
+                    if (value.toLowerCase().contains("s")) {
                         endResult.put(key, "Y");
-                    } else if (value.startsWith("S")) {
+                    } else if (value.toLowerCase().contains("h")) {
                         endResult.put(key, "N");
                     } else {
                         endResult.put(key, "U");
                     }
-                } else if (mail2Matcher.matches()) {
-                    if (value.startsWith("S")) {
+                } else if (!key.contains("sp")) {
+                    System.out.println("!key.contains(\"p\"): " + !key.contains("p"));
+                    if (value.toLowerCase().contains("h")) {
                         endResult.put(key, "Y");
-                    } else if (value.startsWith("H")) {
+                    } else if (value.toLowerCase().contains("s")) {
                         endResult.put(key, "N");
                     } else {
                         endResult.put(key, "U");
@@ -106,9 +101,10 @@ public class Controller implements Serializable {
                     System.out.println("Fout bij checken van het resultaat van file: " + key);
                 }
             }
-        }
-        } catch (PatternSyntaxException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\nBlog: " + blog
+                    + "\nMail: " + mail
+                    + "\nKey: " + key + " value: " + value
+                    + "\nCorrect?: " + endResult.get(key));
         }
         double percentage;
         double correct = 0;
@@ -121,8 +117,8 @@ public class Controller implements Serializable {
             }
         }
 
-        percentage = correct/(correct+incorrect);
-        System.out.println("Percentage goed: " + percentage);
+        percentage = (correct/(correct+incorrect)) * 100;
+        System.out.println("Percentage goed: " + percentage + "%");
         System.out.println("Correct: " + correct);
         System.out.println("Incorrect: " + incorrect);
         return percentage;

@@ -5,8 +5,7 @@ import java.io.File;
 import model.classifiers.Classifier;
 import model.classifiers.NaiveBayes;
 import model.document.StandardDocument;
-import model.processeddocumentset.BinomialDataSet;
-import model.processeddocumentset.BinomialDataSetv2;
+import model.processeddocumentset.BinomialDataSetv3;
 import model.processeddocumentset.ProcessedDocumentSet;
 
 public class testClassifier {
@@ -18,7 +17,7 @@ public class testClassifier {
 			long time = System.currentTimeMillis();
 			File f1 = new File("InteractiveLearner" + File.separator + "data" + File.separator + "spam");
 			File f2 = new File("InteractiveLearner" + File.separator + "data" + File.separator + "ham");
-			BinomialDataSet docset = new BinomialDataSet(f1, f2);
+			ProcessedDocumentSet docset = new BinomialDataSetv3(f1, f2);
 			Classifier NB = new NaiveBayes("spam", "ham");
 			NB.train(docset);
 
@@ -41,7 +40,7 @@ public class testClassifier {
 			long time = System.currentTimeMillis();
 			File f1 = new File("data" + File.separator + "spam");
 			File f2 = new File("data" + File.separator + "ham");
-			ProcessedDocumentSet docset = new BinomialDataSet(f1, f2);
+			ProcessedDocumentSet docset = new BinomialDataSetv3(f1, f2);
 			Classifier NB = new NaiveBayes("spam", "ham");
 			NB.train(docset);
 

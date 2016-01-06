@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.document.Document;
 import model.documentprocessor.DocumentProcessor;
-import model.featureselection.DocumentFrequency;
+import model.featureselection.ChiSquared;
 import model.featureselection.FeatureSelection;
 import model.processeddocumentset.ProcessedDocumentSet;
 
@@ -23,14 +23,18 @@ public class FSNaiveBayes implements Classifier {
 	@Override
 	public String classify(Document document) {
 		String[] normalized = DocumentProcessor.normalize(document);
-		List<String> selected = this.filter(normalized);
+		
+		List<String> selected1 = this.filter(normalized, classification1);
+		List<String> selected2 = this.filter(normalized, classification2);
 
 		double wordCount = (double) kb.wordCount();
 		
 		double chanceWordsGivenClassification1 = 0;
 		double chanceWordsGivenClassification2 = 0;
-		for (String word : selected) {
+		for (String word : selected1) {
 			chanceWordsGivenClassification1 = chanceWordsGivenClassification1 + (Math.log(((double) kb.getFrequency(word, classification1) + 1) / ((double) kb.wordCount(classification1) + 1)));
+		}
+		for (String word : selected2)	{
 			chanceWordsGivenClassification2 = chanceWordsGivenClassification2 + (Math.log(((double) kb.getFrequency(word, classification2) + 1) / ((double) kb.wordCount(classification2) + 1)));
 		}
 		double chanceClassification1 = (double) kb.wordCount(classification1) / wordCount;
@@ -53,12 +57,12 @@ public class FSNaiveBayes implements Classifier {
 	@Override
 	public void train(ProcessedDocumentSet documents) {
 		kb = documents;
-		fs = new DocumentFrequency(documents);
+		fs = new ChiSquared(documents);
 		fs.update();
 	}
 	
-	private List<String> filter(String[] words)	{
-		List<String> selected = this.fs.getSelectedWords();
+	private List<String> filter(String[] words, String classification)	{
+		List<String> selected = this.fs.getSelectedWords(classification);
 		List<String> result = new ArrayList<String>();
 		for (String word : words)	{
 			if (selected.contains(word))	{

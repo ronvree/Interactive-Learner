@@ -13,13 +13,13 @@ public interface ProcessedDocumentSet {
 	public ProcessedDocument getDocument(int index);
 	
 	/**
-	 * Counts the total amount of occurrences of this word in all documents.
+	 * Counts the amount of documents that contain this word
 	 * @param word -- The word to count
 	 */
 	public int getFrequency(String word);
 	
 	/**
-	 * Counts the amount of occurrences of this word in documents with the specified classification.
+	 * Counts the amount of documents with a certain classification that contain this word
 	 * @param word -- The word to count
 	 * @param classification -- Classification of the documents
 	 */
@@ -31,15 +31,15 @@ public interface ProcessedDocumentSet {
 	public int size();
 	
 	/**
-	 * Returns the amount of words in this set
-	 */
-	public int wordCount();
-	
-	/**
 	 * Counts the amount of documents in this set with the specified classification
 	 * @param classification -- The classification of the document
 	 */
-	public int countDocuments(String classification);
+	public int size(String classification);
+	
+	/**
+	 * Returns the amount of words in this set
+	 */
+	public int wordCount();
 	
 	/**
 	 * Returns the total amount of words in documents with this classification
@@ -74,9 +74,5 @@ public interface ProcessedDocumentSet {
 	 */
 	public void clear();
 
-	/**
-	 * Counts documents of classification containing word
-	 */
-	public int countDocsWithWordInClass(String word, String classification);
 	
 }

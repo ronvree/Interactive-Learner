@@ -3,9 +3,9 @@ package testing;
 import java.io.File;
 import java.util.List;
 
-import model.featureselection.DocumentFrequency;
+import model.featureselection.ChiSquared;
 import model.featureselection.FeatureSelection;
-import model.processeddocumentset.BinomialDataSet;
+import model.processeddocumentset.BinomialDataSetv3;
 import model.processeddocumentset.ProcessedDocumentSet;
 
 public class TestFeatureSelection {
@@ -16,12 +16,12 @@ public class TestFeatureSelection {
 		String c1 = "ham";
 		String c2 = "spam";
 		
-		ProcessedDocumentSet dataset = new BinomialDataSet(new File(location + c1), new File(location + c2));
-		FeatureSelection fs = new DocumentFrequency(dataset);
+		ProcessedDocumentSet dataset = new BinomialDataSetv3(new File(location + c1), new File(location + c2));
+		FeatureSelection fs = new ChiSquared(dataset);
 		
 		fs.update();
 		
-		List<String> selected = fs.getSelectedWords();
+		List<String> selected = fs.getSelectedWords("spam");
 		for (String word : selected)	{
 			System.out.println(word);
 		}

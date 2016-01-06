@@ -90,7 +90,7 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 	}
 	
 	@Override
-	public int countDocuments(String classification)	{
+	public int size(String classification)	{
 		int count = 0;
 		for (ProcessedDocument doc : this.documents)	{
 			if (doc.getClassification().equals(classification))	{
@@ -160,15 +160,5 @@ public class BinomialDataSet implements ProcessedDocumentSet {
 		return count != null? count:0;
 	}
 
-	@Override
-	public int countDocsWithWordInClass(String word, String classification) {
-		int result = 0;
-		for (ProcessedDocument doc : this.documents) {
-			if (doc.getDocument().getText().contains(word)) {
-				result++;
-			}
-		}
-		return result;
-	}
 
 }

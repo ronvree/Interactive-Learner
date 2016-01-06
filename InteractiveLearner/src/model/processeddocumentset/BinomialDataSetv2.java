@@ -84,7 +84,7 @@ public class BinomialDataSetv2 implements ProcessedDocumentSet {
 	}
 
 	@Override
-	public int countDocuments(String classification) {
+	public int size(String classification) {
 		int count = 0;
 		for (ProcessedDocument doc : this.documents)	{
 			if (doc.getClassification().equals(classification))	{
@@ -155,16 +155,5 @@ public class BinomialDataSetv2 implements ProcessedDocumentSet {
 		this.frequencies.get(class2).clear();
 	}
 
-	@Override
-	public int countDocsWithWordInClass(String word, String classification) {
-		int result = 0;
-		for (ProcessedDocument doc : this.documents) {
-			if (doc.getDocument().getText().contains(word)) {
-				result++;
-			}
-		}
-		return result;
-	}
-	
 
 }

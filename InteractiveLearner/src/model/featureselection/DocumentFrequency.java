@@ -15,7 +15,7 @@ public class DocumentFrequency extends FeatureSelection {
 	}
 
 	@Override
-	public int score(String word) {
+	public int score(String word, String classification) {
 		return this.dataSet.getFrequency(word);
 	}
 

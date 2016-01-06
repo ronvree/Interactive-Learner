@@ -17,8 +17,8 @@ public class TestDocumentSet {
 		BinomialDataSet docset = new BinomialDataSet(f1,f2);
 		
 		System.out.println("Nr of files: " + docset.size());
-		System.out.println("Nr of " + c1 + ": " + docset.countDocuments(c1));
-		System.out.println("Nr of " + c2 + ": " + docset.countDocuments(c2));
+		System.out.println("Nr of " + c1 + ": " + docset.size(c1));
+		System.out.println("Nr of " + c2 + ": " + docset.size(c2));
 		System.out.println();
 		
 		String s = "viagra";

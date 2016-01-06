@@ -3,6 +3,7 @@ package testing;
 import java.io.File;
 import java.util.List;
 
+import model.featureselection.ChiSquared;
 import model.featureselection.FeatureSelection;
 import model.processeddocumentset.BinomialDataSet;
 import model.processeddocumentset.ProcessedDocumentSet;
@@ -16,7 +17,7 @@ public class TestFeatureSelection {
 		String c2 = "spam";
 		
 		ProcessedDocumentSet dataset = new BinomialDataSet(new File(location + c1), new File(location + c2));
-		FeatureSelection fs = new WritingChiSquared(dataset);
+		FeatureSelection fs = new ChiSquared(dataset);
 		
 		fs.update();
 		

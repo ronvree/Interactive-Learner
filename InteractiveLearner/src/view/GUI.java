@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import testing.CompleteTest;
+import controller.Controller;
 
 
 public class GUI extends JPanel implements ActionListener {
@@ -104,7 +104,7 @@ public class GUI extends JPanel implements ActionListener {
 
                 System.out.println("test: " + testClassFolder);
 
-                result = CompleteTest.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder), featureSelection.isSelected(), removeStopWords.isSelected());
+                result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder), featureSelection.isSelected(), removeStopWords.isSelected());
                 showResults();
             } else {
                 String message = "Not entered correct data!";

@@ -43,9 +43,9 @@ public class CompleteTest {
             result.put(file.getName(), classification);
         }
         long classificationTime = System.currentTimeMillis() - time;
-        result.put("Dataset instantiated in ms: ", String.valueOf(dataSetCreatedIn));
-        result.put("Trained in ms: ", String.valueOf(trainTime));
-        result.put("Classified in ms: ", String.valueOf(classificationTime));
+        System.out.println("Dataset instantiated in ms: " + dataSetCreatedIn);
+        System.out.println("Trained in ms: " + trainTime);
+        System.out.println("Classified in ms: " + classificationTime);
         double percentage = checkResult(result);
         result.put("Percentage", String.valueOf(percentage));
         return result;

@@ -20,8 +20,8 @@ public class GUI extends JPanel implements ActionListener {
     JTextField secondClassName;
     String firstClassNameValue;
     String secondClassNameValue;
-    JCheckBox fs;
-    boolean useFeatureSelection = true;
+    JCheckBox featureSelection;
+    JCheckBox removeStopWords;
 
     String chooserTitle;
 
@@ -36,14 +36,9 @@ public class GUI extends JPanel implements ActionListener {
         secondClassName = new JTextField("Please enter second class name");
 
         runTest = new JButton("Run test!");
-        fs = new JCheckBox("Use feature selection", true);
-        fs.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("useFeatureSelection: " + fs.isSelected());
-                useFeatureSelection = fs.isSelected();
-            }
-        });
+        featureSelection = new JCheckBox("Use feature selection", true);
+        removeStopWords = new JCheckBox("Remove stop words", true);
+
         firstClass.addActionListener(this);
         secondClass.addActionListener(this);
         testClass.addActionListener(this);
@@ -67,8 +62,8 @@ public class GUI extends JPanel implements ActionListener {
         add(secondClassName);
 
         add(testClass);
-        add(fs);
-
+        add(featureSelection);
+        add(removeStopWords);
         add(runTest);
 
         firstClass.setVisible(true);
@@ -76,7 +71,7 @@ public class GUI extends JPanel implements ActionListener {
         testClass.setVisible(true);
         firstClassName.setVisible(true);
         secondClassName.setVisible(true);
-        fs.setVisible(true);
+        featureSelection.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -92,7 +87,7 @@ public class GUI extends JPanel implements ActionListener {
 
                 System.out.println("test: " + testClassFolder);
 
-                result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder), useFeatureSelection);
+                result = Controller.runTest(new File(firstClassFolder), firstClassNameValue, new File(secondClassFolder), secondClassNameValue, new File(testClassFolder), featureSelection.isSelected(), removeStopWords.isSelected());
                 showResults();
             } else {
                 String message = "Not entered correct data!";

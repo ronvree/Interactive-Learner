@@ -18,16 +18,17 @@ public class Controller implements Serializable {
         GUI.buildGUI();
 	}
 
-	public static HashMap runTest(File first, String firstName, File second, String secondName, File test, boolean useFeatureSelection) {
+	public static HashMap runTest(File first, String firstName, File second, String secondName, File test, boolean useFeatureSelection, boolean removeStopWords) {
         HashMap<String, String> result = new HashMap<>();
 		long time = System.currentTimeMillis();
 		BinomialDataSet docset = new BinomialDataSet(first, firstName, second, secondName);
         Classifier NB;
         if (useFeatureSelection) {
-            NB = new FSNaiveBayes(firstName, secondName);
+            NB = new FSNaiveBayes(firstName, secondName, removeStopWords);
         } else {
             NB = new NaiveBayes(firstName, secondName);
         }
+
 		NB.train(docset);
 		int counter = 1;
 		for (File file : test.listFiles()) {

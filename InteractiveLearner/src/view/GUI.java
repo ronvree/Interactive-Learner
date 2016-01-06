@@ -48,20 +48,6 @@ public class GUI extends JPanel implements ActionListener {
             }
         });
 
-        firstClassName.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                firstClassNameValue = firstClassName.getText();
-            }
-        });
-
-        secondClassName.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                secondClassNameValue = secondClassName.getText();
-            }
-        });
-
         add(firstClass);
         add(firstClassName);
 
@@ -80,6 +66,8 @@ public class GUI extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(runTest.getActionCommand())) {
+            firstClassNameValue = firstClassName.getText();
+            secondClassNameValue = secondClassName.getText();
             if (firstClassFolder != null && secondClassFolder != null && testClassFolder != null && firstClassName != null && secondClassName != null) {
                 System.out.println("First: " + firstClassFolder);
                 System.out.println("first name: " + firstClassNameValue);
@@ -143,6 +131,7 @@ public class GUI extends JPanel implements ActionListener {
         );
         frame.getContentPane().add(panel,"Center");
         frame.setSize(panel.getPreferredSize());
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 }

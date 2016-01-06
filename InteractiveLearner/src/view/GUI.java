@@ -119,35 +119,6 @@ public class GUI extends JPanel implements ActionListener {
         }
     }
 
-//    public static boolean askUser(File file, String classification) {
-//        JFrame frame = new JFrame("Results");
-//        frame.addWindowListener(
-//                new WindowAdapter() {
-//                    public void windowClosing(WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                }
-//        );
-//
-//        String text = "Please uncheck the box when the classification is not correct.";
-//
-//        JTextField textField = new JTextField(text);
-//        textField.setFont(new Font("Arial", Font.PLAIN, 16));
-//        textField.setEditable(false);
-//        frame.add(textField);
-//        textField.setVisible(true);
-//        JButton correct = new JButton("Correct");
-//        JButton wrong = new JButton("Wrong");
-//
-//        frame.setSize(250, 500);
-//
-//        frame.setVisible(true);
-//        frame.setAlwaysOnTop(true);
-//        frame.setResizable(true);
-//
-//        return ;
-//    }
-
     public String chooseFolder() throws NullPointerException {
         File result = null;
         try {

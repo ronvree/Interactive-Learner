@@ -10,6 +10,28 @@ import model.featureselection.FeatureSelection;
 import model.processeddocumentset.ProcessedDocumentSet;
 
 public class FSNaiveBayes implements Classifier {
+	
+	private static final List<String> STOPWORDS = new ArrayList<String>();
+	static	{
+		STOPWORDS.add("a");
+		STOPWORDS.add("an");
+		STOPWORDS.add("as");
+		STOPWORDS.add("at");
+		STOPWORDS.add("be");
+		STOPWORDS.add("by");
+		STOPWORDS.add("in");
+		STOPWORDS.add("is");
+		STOPWORDS.add("of");
+		STOPWORDS.add("on");
+		STOPWORDS.add("or");
+		STOPWORDS.add("to");
+		STOPWORDS.add("and");
+		STOPWORDS.add("are");
+		STOPWORDS.add("for");
+		STOPWORDS.add("with");
+		STOPWORDS.add("the");
+	}
+	
 	private FeatureSelection fs;
 	private ProcessedDocumentSet kb;
 	private String classification1;
@@ -62,7 +84,7 @@ public class FSNaiveBayes implements Classifier {
 		List<String> selected = this.fs.getSelectedWords(classification);
 		List<String> result = new ArrayList<String>();
 		for (String word : words)	{
-			if (selected.contains(word))	{
+			if (selected.contains(word) && !STOPWORDS.contains(word))	{
 				result.add(word);
 			}
 		}
